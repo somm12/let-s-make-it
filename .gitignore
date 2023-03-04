@@ -8,6 +8,7 @@
 # server
 /server/node_modules
 server/index.js
+server/db-key.js
 # testing
 /coverage
 
