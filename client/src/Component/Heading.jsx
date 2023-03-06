@@ -17,24 +17,18 @@ const Heading = () => {
           </Navbar.Brand>
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link>
-                <Link to="/" style={{ textDecoration: "none", color: "white" }}>
-                  Home
-                </Link>
-              </Nav.Link>
-              <Nav.Link>
-                <Link
-                  to="/upload"
-                  style={{ textDecoration: "none", color: "white" }}
-                >
-                  Upload
-                </Link>
-              </Nav.Link>
-              <Nav.Link>
-                <Link to="/" style={{ textDecoration: "none", color: "white" }}>
-                  List
-                </Link>
-              </Nav.Link>
+              <Link to="/" style={{ textDecoration: "none", color: "white" }}>
+                Home
+              </Link>
+              <Link
+                to="/upload"
+                style={{ textDecoration: "none", color: "white" }}
+              >
+                Upload
+              </Link>
+              <Link to="/" style={{ textDecoration: "none", color: "white" }}>
+                List
+              </Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
