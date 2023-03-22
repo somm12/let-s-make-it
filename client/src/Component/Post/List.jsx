@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { ListDiv } from "../../Style/ListCSS.js";
 import axios from "axios";
 
 const List = ({ list }) => {
@@ -20,10 +22,12 @@ const List = ({ list }) => {
     <div>
       <h1>list!</h1>
       {postList.map((post, idx) => (
-        <div key={idx}>
-          <h1>제목 : {post.title}</h1>
-          <h2>내용 : {post.content}</h2>
-        </div>
+        <ListDiv key={idx}>
+          <Link to={`/post/${post.postNum}`}>
+            <h1>제목 : {post.title}</h1>
+            <h2>내용 : {post.content}</h2>
+          </Link>
+        </ListDiv>
       ))}
     </div>
   );
