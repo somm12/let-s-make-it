@@ -17,9 +17,6 @@ const Heading = () => {
           </Navbar.Brand>
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Link to="/" style={{ textDecoration: "none", color: "white" }}>
-                Home
-              </Link>
               <Link
                 to="/upload"
                 style={{ textDecoration: "none", color: "white" }}
@@ -27,7 +24,7 @@ const Heading = () => {
                 Upload
               </Link>
               <Link to="/" style={{ textDecoration: "none", color: "white" }}>
-                List
+                Home
               </Link>
             </Nav>
           </Navbar.Collapse>

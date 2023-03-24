@@ -14,6 +14,15 @@ const UploadButtonDiv = styled.div`
       background-color: white;
     }
   }
+  .cancel {
+    margin-right: 0.5rem;
+    color: black;
+    background-color: white;
+    &:hover {
+      background-color: black;
+      color: white;
+    }
+  }
 `;
 
 const UploadForm = styled.form`
