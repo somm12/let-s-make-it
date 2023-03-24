@@ -8,7 +8,7 @@ const List = ({ list }) => {
   const [postList, setPostList] = useState([]);
   useEffect(() => {
     axios
-      .post("/api/post/list")
+      .get("/api/post/list")
       .then((res) => {
         if (res.data.success) {
           setPostList([...res.data.postList]);

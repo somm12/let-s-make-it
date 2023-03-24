@@ -26,7 +26,7 @@ router.post("/submit", (req, res) => {
     });
 });
 
-router.post("/list", (req, res) => {
+router.get("/list", (req, res) => {
   Post.find()
     .exec()
     .then((doc) => {
@@ -72,8 +72,10 @@ router.post("/edit", (req, res) => {
     });
 });
 
-router.delete("/api/post/delete", (req, res) => {
-  console.log(req.body, "aaa");
+router.delete("/delete", (req, res) => {
+  // const { postNum } = req.params;
+  console.log("aaaaaaaa");
+  console.log(req.body.postNum, "삭제학ㅁㄴㄹㅇㅁㄹ");
   Post.deleteOne({ postNum: Number(req.body.postNum) })
     .exec()
     .then(() => {
