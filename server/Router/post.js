@@ -73,9 +73,6 @@ router.post("/edit", (req, res) => {
 });
 
 router.delete("/delete", (req, res) => {
-  // const { postNum } = req.params;
-  console.log("aaaaaaaa");
-  console.log(req.body.postNum, "삭제학ㅁㄴㄹㅇㅁㄹ");
   Post.deleteOne({ postNum: Number(req.body.postNum) })
     .exec()
     .then(() => {
