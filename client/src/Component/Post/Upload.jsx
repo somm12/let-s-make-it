@@ -4,6 +4,8 @@ import {
   UploadForm,
   UploadDiv,
 } from "../../Style/UploadCSS.js";
+
+import ImageUpload from "./ImageUpload";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 const Upload = ({ list, setList }) => {
@@ -52,6 +54,7 @@ const Upload = ({ list, setList }) => {
       <UploadForm>
         <label htmlFor="label">제목</label>
         <input id="title" value={title} onChange={onChangeText} />
+        <ImageUpload />
         <label htmlFor="content">내용</label>
         <textarea id="content" value={content} onChange={onChangeContent} />
         <UploadButtonDiv>

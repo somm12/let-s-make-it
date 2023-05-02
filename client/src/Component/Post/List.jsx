@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { ListDiv } from "../../Style/ListCSS.js";
+
 import axios from "axios";
 
 const List = ({ list }) => {
@@ -21,6 +22,7 @@ const List = ({ list }) => {
   return (
     <div>
       <h1>list!</h1>
+
       {postList.map((post, idx) => (
         <ListDiv key={idx}>
           <Link to={`/post/${post.postNum}`}>

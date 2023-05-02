@@ -30,8 +30,9 @@ const UploadForm = styled.form`
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  input {
+  #title {
     border-radius: 0.5rem;
+    margin-bottom: 0.5rem;
     border: 1px solid gray;
     &:focus,
     &:active {
