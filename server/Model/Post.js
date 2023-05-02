@@ -4,6 +4,7 @@ const postSchema = new mongoose.Schema(
     title: String,
     content: String,
     postNum: Number,
+    image: String,
   },
   { collection: "posts" }
 );
