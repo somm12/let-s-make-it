@@ -1,7 +1,7 @@
 import React from "react";
 import { Form } from "react-bootstrap";
 import axios from "axios";
-const ImageUpload = ({ setImage }) => {
+const ImageEdit = ({ image, setImage }) => {
   const fileUpload = (e) => {
     const formData = new FormData();
     formData.append("file", e.target.files[0]);
@@ -19,8 +19,9 @@ const ImageUpload = ({ setImage }) => {
         accept="image/*"
         className="shadow-none"
       />
+      <img src={`http://localhost:5000/${image}`} alt="" />
     </div>
   );
 };
 
-export default ImageUpload;
+export default ImageEdit;

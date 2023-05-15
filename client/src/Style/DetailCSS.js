@@ -15,6 +15,10 @@ const PostDiv = styled.div`
   border-radius: 0.5rem;
   padding: 0.5rem;
   width: 100%;
+  img {
+    width: 100%;
+    height: auto;
+  }
 `;
 const BtnDiv = styled.div`
   margin-top: 1rem;

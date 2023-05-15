@@ -5,6 +5,7 @@ import {
   UploadDiv,
 } from "../../Style/UploadCSS.js";
 import { useParams, useNavigate } from "react-router-dom";
+import ImageEdit from "./ImageEdit";
 import axios from "axios";
 const Edit = () => {
   let params = useParams();
@@ -12,6 +13,7 @@ const Edit = () => {
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
   const [post, setPost] = useState([]);
+  const [image, setImage] = useState("");
   const onChangeContent = (e) => {
     const {
       target: { value },
@@ -30,7 +32,8 @@ const Edit = () => {
       alert("제목 내용 모두 입력해주세요");
       return;
     }
-    const body = { title, content, postNum: post.postNum };
+    console.log(image, "업로드");
+    const body = { title, content, postNum: post.postNum, image };
     console.log(body);
     axios
       .post("/api/post/edit", body)
@@ -58,6 +61,7 @@ const Edit = () => {
           setPost(res.data.post);
           setContent(res.data.post.content);
           setTitle(res.data.post.title);
+          setImage(res.data.post.image);
         }
       })
       .catch((err) => {
@@ -74,6 +78,7 @@ const Edit = () => {
       <UploadForm>
         <label htmlFor="label">제목</label>
         <input id="title" value={title} onChange={onChangeText} />
+        <ImageEdit image={image} setImage={setImage} />
         <label htmlFor="content">내용</label>
         <textarea id="content" value={content} onChange={onChangeContent} />
         <UploadButtonDiv>

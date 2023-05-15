@@ -12,6 +12,7 @@ const Upload = ({ list, setList }) => {
   const navigate = useNavigate();
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
+  const [image, setImage] = useState("");
   const onChangeContent = (e) => {
     const {
       target: { value },
@@ -30,7 +31,7 @@ const Upload = ({ list, setList }) => {
       alert("제목 내용 모두 입력해주세요");
       return;
     }
-    const body = { title, content };
+    const body = { title, content, image };
     axios
       .post("/api/post/submit", body)
       .then((res) => {
@@ -54,7 +55,7 @@ const Upload = ({ list, setList }) => {
       <UploadForm>
         <label htmlFor="label">제목</label>
         <input id="title" value={title} onChange={onChangeText} />
-        <ImageUpload />
+        <ImageUpload setImage={setImage} />
         <label htmlFor="content">내용</label>
         <textarea id="content" value={content} onChange={onChangeContent} />
         <UploadButtonDiv>
