@@ -2,7 +2,7 @@ import express from "express";
 import Post from "../Model/Post.js";
 import Counter from "../Model/Counter.js";
 import multer from "multer";
-
+import setUpload from "../Util/upload.js";
 const router = express.Router();
 
 router.post("/submit", (req, res) => {
@@ -87,29 +87,33 @@ router.delete("/delete", (req, res) => {
     });
 });
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "image/");
-  },
-  filename: function (req, file, cb) {
-    // 한글 파일명 유지.
-    file.originalname = Buffer.from(file.originalname, "latin1").toString(
-      "utf8"
-    );
-    cb(null, Date.now() + "-" + file.originalname);
-  },
-});
+// const storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, "image/");
+//   },
+//   filename: function (req, file, cb) {
+//     // 한글 파일명 유지.
+//     file.originalname = Buffer.from(file.originalname, "latin1").toString(
+//       "utf8"
+//     );
+//     cb(null, Date.now() + "-" + file.originalname);
+//   },
+// });
 
-const upload = multer({ storage: storage }).single("file");
+// const upload = multer({ storage: storage }).single("file");
 
-router.post("/image/upload", (req, res) => {
-  upload(req, res, (err) => {
-    if (err) {
-      console.log(err);
-      res.status(400).json({ success: false });
-    } else {
-      res.status(200).json({ success: true, filePath: res.req.file.path });
-    }
-  });
+// router.post("/image/upload", (req, res) => {
+//   upload(req, res, (err) => {
+//     if (err) {
+//       console.log(err);
+//       res.status(400).json({ success: false });
+//     } else {
+//       res.status(200).json({ success: true, filePath: res.req.file.path });
+//     }
+//   });
+// });
+
+router.post("/image/upload", setUpload("letsmakeit/post"), (req, res) => {
+  res.status(200).json({ success: true, filePath: res.req.file.location });
 });
 export default router;
