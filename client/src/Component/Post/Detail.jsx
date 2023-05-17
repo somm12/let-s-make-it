@@ -54,9 +54,7 @@ const Detail = () => {
         <>
           <PostDiv>
             <div className="title">{post.title}</div>
-            {post.image && (
-              <img src={`http://localhost:5000/${post.image}`} alt="" />
-            )}
+            {post.image && <img src={post.image} alt="" />}
             <div className="content">{post.content}</div>
           </PostDiv>
           <BtnDiv>
