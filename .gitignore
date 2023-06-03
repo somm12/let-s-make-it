@@ -9,6 +9,9 @@
 /server/node_modules
 server/index.js
 server/db-key.js
+server/config/dev.js
+server/config/production.js
+
 # testing
 /coverage
 

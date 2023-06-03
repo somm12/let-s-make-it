@@ -15,17 +15,40 @@ const Heading = () => {
           <Navbar.Brand href="#home" style={{ color: "white" }}>
             React-Bootstrap
           </Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Link
+              <Nav.Link
                 to="/upload"
-                style={{ textDecoration: "none", color: "white" }}
+                style={{
+                  textDecoration: "none",
+                  color: "white",
+                  margin: "5px",
+                }}
               >
                 Upload
-              </Link>
-              <Link to="/" style={{ textDecoration: "none", color: "white" }}>
+              </Nav.Link>
+              <Nav.Link
+                to="/"
+                style={{
+                  textDecoration: "none",
+                  color: "white",
+                  margin: "5px",
+                }}
+              >
                 Home
-              </Link>
+              </Nav.Link>
+              <Nav.Link
+                to="/login"
+                style={{
+                  textDecoration: "none",
+                  color: "white",
+                  margin: "5px",
+                }}
+              >
+                Login
+              </Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
