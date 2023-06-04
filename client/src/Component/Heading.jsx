@@ -19,7 +19,7 @@ const Heading = () => {
 
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link
+              <Link
                 to="/upload"
                 style={{
                   textDecoration: "none",
@@ -28,8 +28,8 @@ const Heading = () => {
                 }}
               >
                 Upload
-              </Nav.Link>
-              <Nav.Link
+              </Link>
+              <Link
                 to="/"
                 style={{
                   textDecoration: "none",
@@ -38,8 +38,8 @@ const Heading = () => {
                 }}
               >
                 Home
-              </Nav.Link>
-              <Nav.Link
+              </Link>
+              <Link
                 to="/login"
                 style={{
                   textDecoration: "none",
@@ -48,7 +48,7 @@ const Heading = () => {
                 }}
               >
                 Login
-              </Nav.Link>
+              </Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
