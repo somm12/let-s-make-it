@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import firebase from "../../firebase.js";
 import LoginDiv from "../../Style/UserCSS.js";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [PWConfirm, setPWConfirm] = useState("");
 
+  let navigate = useNavigate();
   const signUp = async (e) => {
     e.preventDefault();
     if (!(name && email && password && PWConfirm)) {
@@ -23,6 +26,20 @@ const Register = () => {
       displayName: name,
     });
     console.log(createdUser.user);
+    let body = {
+      email: createdUser.user.multiFactor.user.email,
+      displayName: createdUser.user.multiFactor.user.displayName,
+      uid: createdUser.user.multiFactor.user.uid,
+    };
+
+    try {
+      const data = await axios.post("api/user/signUp", body);
+      console.log(data);
+      navigate("/login");
+    } catch (e) {
+      console.log(e);
+      return alert("회원가입이 실패했습니다");
+    }
   };
 
   return (
