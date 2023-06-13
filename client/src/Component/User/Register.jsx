@@ -8,9 +8,11 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [PWConfirm, setPWConfirm] = useState("");
+  const [flag, setFlag] = useState(false); // 유저가 회원가입 버튼을 계속 누를 경우 대비.
 
   let navigate = useNavigate();
   const signUp = async (e) => {
+    setFlag(true);
     e.preventDefault();
     if (!(name && email && password && PWConfirm)) {
       return alert("모든 값을 채워 주세요!");
@@ -30,11 +32,12 @@ const Register = () => {
       email: createdUser.user.multiFactor.user.email,
       displayName: createdUser.user.multiFactor.user.displayName,
       uid: createdUser.user.multiFactor.user.uid,
+      returnSecureToken: true,
     };
 
     try {
-      const data = await axios.post("api/user/signUp", body);
-      console.log(data);
+      const data = await axios.post("/api/user/signUp", body);
+      setFlag(false);
       navigate("/login");
     } catch (e) {
       console.log(e);
@@ -60,16 +63,20 @@ const Register = () => {
         <label>비밀번호</label>
         <input
           type="password"
+          minLength={8}
           value={password}
           onChange={(e) => setPassword(e.currentTarget.value)}
         />
         <label>비밀번호 확인</label>
         <input
           type="password"
+          minLength={8}
           value={PWConfirm}
           onChange={(e) => setPWConfirm(e.currentTarget.value)}
         />
-        <button onClick={signUp}>회원가입</button>
+        <button disabled={flag} onClick={signUp}>
+          회원가입
+        </button>
       </form>
     </LoginDiv>
   );
