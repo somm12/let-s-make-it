@@ -36,7 +36,7 @@ const Register = () => {
     };
 
     try {
-      const data = await axios.post("/api/user/signUp", body);
+      await axios.post("/api/user/signUp", body);
       setFlag(false);
       navigate("/login");
     } catch (e) {
