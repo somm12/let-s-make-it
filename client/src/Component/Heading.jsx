@@ -1,19 +1,27 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { Button } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
+import firebase from "../firebase";
 
 const Heading = () => {
-  const [test, setTest] = useState(0);
+  const user = useSelector((state) => state.user);
+  console.log(user);
+  const navigate = useNavigate();
+  const logOut = () => {
+    firebase.auth().signOut();
+    navigate("/");
+  };
   return (
     <div>
       <Navbar bg="dark" expand="lg">
         <Container>
-          <Navbar.Brand href="#home" style={{ color: "white" }}>
-            React-Bootstrap
+          <Navbar.Brand href="/" style={{ color: "white" }}>
+            Let's Make It!
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
 
@@ -39,6 +47,20 @@ const Heading = () => {
               >
                 Home
               </Link>
+            </Nav>
+          </Navbar.Collapse>
+          <Navbar.Collapse
+            className="loginNavbar"
+            style={{ justifyContent: "end" }}
+          >
+            {user.accessToken ? (
+              <Navbar.Text
+                onClick={logOut}
+                style={{ color: "white", cursor: "pointer" }}
+              >
+                LogOut
+              </Navbar.Text>
+            ) : (
               <Link
                 to="/login"
                 style={{
@@ -49,7 +71,7 @@ const Heading = () => {
               >
                 Login
               </Link>
-            </Nav>
+            )}
           </Navbar.Collapse>
         </Container>
       </Navbar>

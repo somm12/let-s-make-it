@@ -7,7 +7,6 @@ import { loginUser, clearUser } from "../../Reducer/userSlice";
 
 const Login = () => {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -16,22 +15,21 @@ const Login = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    //
     firebase.auth().onAuthStateChanged((userInfo) => {
       // 현재 로그인한 유저의 정보.
       if (userInfo !== null) {
         dispatch(loginUser(userInfo.multiFactor.user));
+      } else {
+        // 현재 유저 정보가 없다면, 로그인 상태가 아니므로, user store를 비운다.
+        dispatch(clearUser());
       }
     });
   }, []);
 
   useEffect(() => {
-    firebase.auth().signOut();
+    // firebase.auth().signOut();
   }, []);
 
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
   const signIn = async (e) => {
     e.preventDefault();
 
