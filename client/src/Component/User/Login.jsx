@@ -2,13 +2,36 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import LoginDiv from "../../Style/UserCSS.js";
 import firebase from "../../firebase.js";
+import { useSelector, useDispatch } from "react-redux";
+import { loginUser, clearUser } from "../../Reducer/userSlice";
+
 const Login = () => {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
 
   const navigate = useNavigate();
-  console.log(email, password);
+
+  useEffect(() => {
+    //
+    firebase.auth().onAuthStateChanged((userInfo) => {
+      // 현재 로그인한 유저의 정보.
+      if (userInfo !== null) {
+        dispatch(loginUser(userInfo.multiFactor.user));
+      }
+    });
+  }, []);
+
+  useEffect(() => {
+    firebase.auth().signOut();
+  }, []);
+
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
   const signIn = async (e) => {
     e.preventDefault();
 
@@ -52,7 +75,7 @@ const Login = () => {
           value={password}
           onChange={(e) => setPassword(e.currentTarget.value)}
         />
-        {errorMsg != "" && <p>{errorMsg}</p>}
+        {errorMsg !== "" && <p>{errorMsg}</p>}
         <button onClick={signIn}>로그인</button>
         <button
           onClick={(e) => {
