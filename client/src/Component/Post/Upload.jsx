@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import {
   UploadButtonDiv,
   UploadForm,
@@ -10,9 +11,17 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 const Upload = ({ list, setList }) => {
   const navigate = useNavigate();
+  const user = useSelector((state) => state.user);
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
   const [image, setImage] = useState("");
+
+  useEffect(() => {
+    if (!user.accessToken) {
+      alert("로그인한 유저만 글을 작성할 수 있습니다.");
+      navigate("/login");
+    }
+  }, []);
   const onChangeContent = (e) => {
     const {
       target: { value },
@@ -31,7 +40,7 @@ const Upload = ({ list, setList }) => {
       alert("제목 내용 모두 입력해주세요");
       return;
     }
-    const body = { title, content, image };
+    const body = { title, content, image, uid: user.uid };
     axios
       .post("/api/post/submit", body)
       .then((res) => {

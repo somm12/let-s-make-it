@@ -1,26 +1,36 @@
 import express from "express";
 import Post from "../Model/Post.js";
 import Counter from "../Model/Counter.js";
-import multer from "multer";
+import User from "../Model/User.js";
 import setUpload from "../Util/upload.js";
 const router = express.Router();
 
 router.post("/submit", (req, res) => {
   console.log(req.body);
-  let temp = req.body;
+  let temp = {
+    title: req.body.title,
+    content: req.body.content,
+    image: req.body.image,
+  };
   console.log(temp);
   Counter.findOne({ name: "counter" })
     .exec()
     .then((counter) => {
       temp.postNum = counter.postNum;
-      const newPost = new Post(temp);
-      newPost.save().then(() => {
-        Counter.updateOne({ name: "counter" }, { $inc: { postNum: 1 } }).then(
-          () => {
-            res.status(200).json({ success: true });
-          }
-        );
-      });
+      User.findOne({ uid: req.body.uid })
+        .exec()
+        .then((userInfo) => {
+          temp.author = userInfo._id;
+          const newPost = new Post(temp);
+          newPost.save().then(() => {
+            Counter.updateOne(
+              { name: "counter" },
+              { $inc: { postNum: 1 } }
+            ).then(() => {
+              res.status(200).json({ success: true });
+            });
+          });
+        });
     })
     .catch((err) => {
       res.status(400).json({ success: false });
@@ -30,6 +40,7 @@ router.post("/submit", (req, res) => {
 
 router.get("/list", (req, res) => {
   Post.find()
+    .populate("author")
     .exec()
     .then((doc) => {
       console.log(doc);
@@ -46,6 +57,7 @@ router.post("/detail", (req, res) => {
   let temp = req.body;
 
   Post.findOne({ postNum: Number(req.body.postNum) })
+    .populate("author")
     .exec()
     .then((doc) => {
       console.log(doc);

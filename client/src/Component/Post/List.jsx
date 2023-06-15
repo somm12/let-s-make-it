@@ -47,6 +47,7 @@ const List = ({ list }) => {
         <ListDiv key={idx}>
           <Link to={`/post/${post.postNum}`}>
             <h1>제목 : {post.title}</h1>
+            <h2>작성자: {post.author.displayName}</h2>
             <h2>내용 : {post.content}</h2>
           </Link>
         </ListDiv>
