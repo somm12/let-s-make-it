@@ -24,4 +24,21 @@ router.post("/signUp", (req, res) => {
       console.log(err);
     });
 });
+
+router.post("/nameCheck", (req, res) => {
+  console.log(req.body.displayName);
+  User.findOne({ displayName: req.body.displayName })
+    .exec()
+    .then((doc) => {
+      let check = true;
+      if (doc) {
+        check = false;
+      }
+      res.status(200).json({ success: true, check });
+    })
+    .catch((err) => {
+      res.status(400).json({ success: false });
+      console.log(err);
+    });
+});
 export default router;

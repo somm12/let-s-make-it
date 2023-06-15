@@ -10,6 +10,9 @@ const Register = () => {
   const [PWConfirm, setPWConfirm] = useState("");
   const [flag, setFlag] = useState(false); // 유저가 회원가입 버튼을 계속 누를 경우 대비.
 
+  const [nameCheck, setNameCheck] = useState(false);
+  const [nameCheckMsg, setNameCheckMsg] = useState("");
+
   let navigate = useNavigate();
   const signUp = async (e) => {
     setFlag(true);
@@ -19,6 +22,9 @@ const Register = () => {
     }
     if (password !== PWConfirm) {
       return alert("비밀번호와 비밀번호 확인 값이 다릅니다!");
+    }
+    if (!nameCheck) {
+      return alert("닉네임 중복검사를 해주세요!");
     }
     let createdUser = await firebase
       .auth()
@@ -44,16 +50,41 @@ const Register = () => {
       return alert("회원가입이 실패했습니다");
     }
   };
-
+  const nameCheckHandler = async (e) => {
+    e.preventDefault();
+    if (!name) {
+      return alert("닉네임을 입력해주세요!");
+    }
+    let body = {
+      displayName: name,
+    };
+    try {
+      const data = await axios.post("/api/user/nameCheck", body);
+      if (data.data.success) {
+        if (data.data.check) {
+          console.log("afdaf");
+          setNameCheckMsg("사용 가능한 닉네임입니다.");
+          setNameCheck(true);
+        } else {
+          setNameCheckMsg("중복된 닉네임입니다.");
+        }
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
   return (
     <LoginDiv>
       <form>
-        <label>이름</label>
+        <label>닉네임</label>
         <input
           type="text"
           value={name}
+          disabled={nameCheck}
           onChange={(e) => setName(e.currentTarget.value)}
         />
+        <button onClick={nameCheckHandler}>닉네임 중복검사</button>
+        <p>{nameCheckMsg}</p>
         <label>이메일</label>
         <input
           type="email"
