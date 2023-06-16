@@ -31,12 +31,7 @@ const Upload = ({ postId }) => {
       console.log(e.error);
     }
   };
-  useEffect(() => {
-    if (!user.accessToken) {
-      alert("로그인을 먼저 해주세요!");
-      navigate("/login");
-    }
-  }, []);
+
   return (
     <div>
       <input
