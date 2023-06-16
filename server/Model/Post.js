@@ -9,6 +9,11 @@ const postSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
+    commentNum: {
+      // 댓글 개수.
+      type: Number,
+      default: 0,
+    },
   },
   { collection: "posts" }
 );
