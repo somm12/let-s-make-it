@@ -5,7 +5,7 @@ const FetchComment = ({ postId }) => {
   return (
     <div>
       <Upload postId={postId} />
-      <List />
+      <List postId={postId} />
     </div>
   );
 };

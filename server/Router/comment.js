@@ -22,14 +22,28 @@ router.post("/submit", (req, res) => {
           },
           { $inc: { commentNum: 1 } }
         ).then(() => {
-          res.status(200).json({ success: true });
+          return res.status(200).json({ success: true });
         });
       });
     })
     .catch((err) => {
-      res.status(400).json({ success: false });
-      console.log(err);
+      return res.status(400).json({ success: false });
     });
 });
 
+router.post("/list", (req, res) => {
+  console.log(req.body);
+  Comment.find({
+    postId: req.body.postId,
+  })
+    .populate("author")
+    .exec()
+    .then((docs) => {
+      console.log(docs);
+      return res.status(200).json({ success: true, commentList: docs });
+    })
+    .catch((err) => {
+      return res.status(400).json({ success: false });
+    });
+});
 export default router;
