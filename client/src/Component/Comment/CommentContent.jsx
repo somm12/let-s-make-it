@@ -6,6 +6,7 @@ const CommentContent = ({ comment }) => {
   const user = useSelector((state) => state.user);
   const ref = useRef();
   const [modalFlag, setModalFlag] = useState(false);
+  const [editFlag, setEditFlag] = useState(false);
   const modalCloseHandler = ({ target }) => {
     // 모달이 열려있고, ref 영역이 아닌 영역클릭시, 모달 닫기.
     if (modalFlag && !ref.current.contains(target)) setModalFlag(false);
