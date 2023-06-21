@@ -1,6 +1,15 @@
 import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
 import axios from "axios";
-export default function useSubmitComment(postId, uid, comment) {
+
+export const useGetComments = (postId) => {
+  const data = useQuery(["comment", postId], () =>
+    axios.get(`/api/comment/list/${postId}`)
+  );
+  console.log(data, "!!!");
+  return data;
+};
+
+export const useSubmitComment = (postId, uid, comment) => {
   const queryClient = useQueryClient();
 
   let body = {
@@ -8,12 +17,9 @@ export default function useSubmitComment(postId, uid, comment) {
     uid,
     comment,
   };
-  return useMutation(
-    () => axios.post("/api/comment/submit", body, { withCredentials: true }),
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries(["comment", postId]);
-      },
-    }
-  );
-}
+  return useMutation(() => axios.post("/api/comment/submit", body), {
+    onSuccess: () => {
+      queryClient.invalidateQueries(["comment", postId]);
+    },
+  });
+};

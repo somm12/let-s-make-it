@@ -31,10 +31,11 @@ router.post("/submit", (req, res) => {
     });
 });
 
-router.post("/list", (req, res) => {
-  console.log(req.body);
+router.get("/list/:postId", (req, res) => {
+  console.log(req.params, "받았어요.");
+  const { postId } = req.params;
   Comment.find({
-    postId: req.body.postId,
+    postId,
   })
     .populate("author")
     .exec()

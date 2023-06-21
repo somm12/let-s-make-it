@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import useSubmitComment from "./commentAPI";
+import React, { useState, useEffect } from "react";
+import { useSubmitComment } from "./commentAPI";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { useNavigate } from "react-router";
@@ -8,15 +8,21 @@ const Upload = ({ postId }) => {
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
   const [comment, setComment] = useState("");
-  const submitCommentQuery = useSubmitComment(postId, user.uid, comment);
 
-  const submitHandler = async (e) => {
+  const { mutate, isSuccess } = useSubmitComment(postId, user.uid, comment);
+
+  useEffect(() => {
+    if (isSuccess) {
+      setComment("");
+    }
+  }, [isSuccess]);
+
+  const submitHandler = (e) => {
     e.preventDefault();
     if (!comment) {
       alert("댓글을 작성해주세요!");
     }
-
-    submitCommentQuery.mutate();
+    mutate();
 
     // let body = {
     //   postId: postId,
