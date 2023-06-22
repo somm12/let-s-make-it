@@ -47,4 +47,21 @@ router.get("/list/:postId", (req, res) => {
       return res.status(400).json({ success: false });
     });
 });
+
+router.post("/edit", (req, res) => {
+  let temp = {
+    postId: req.body.postId,
+    comment: req.body.comment,
+    uid: req.body.uid,
+  };
+  Comment.findOneAndUpdate({ _id: req.body.commentId }, { $set: temp })
+    .exec()
+    .then(() => {
+      return res.status(200).json({ success: true });
+    })
+    .catch((err) => {
+      console.log(err);
+      return res.status(400).json({ success: false });
+    });
+});
 export default router;
