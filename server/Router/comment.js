@@ -64,4 +64,25 @@ router.post("/edit", (req, res) => {
       return res.status(400).json({ success: false });
     });
 });
+
+router.post("/delete", (req, res) => {
+  Comment.deleteOne({ _id: req.body.commentId })
+    .exec()
+    .then(() => {
+      Post.findOneAndUpdate(
+        {
+          _id: req.body.postId,
+        },
+        { $inc: { commentNum: -1 } }
+      )
+        .exec()
+        .then(() => {
+          return res.status(200).json({ success: true });
+        });
+    })
+    .catch((err) => {
+      console.log(err);
+      return res.status(400).json({ success: false });
+    });
+});
 export default router;

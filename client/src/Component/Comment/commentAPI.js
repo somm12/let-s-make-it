@@ -39,3 +39,18 @@ export const useEditComment = (postId, uid, comment, commentId) => {
     },
   });
 };
+
+export const useDeleteComment = (postId, uid, commentId) => {
+  const queryClient = useQueryClient();
+
+  let body = {
+    postId,
+    uid,
+    commentId,
+  };
+  return useMutation(() => axios.post("/api/comment/delete", body), {
+    onSuccess: () => {
+      queryClient.invalidateQueries(["comment", postId]);
+    },
+  });
+};
