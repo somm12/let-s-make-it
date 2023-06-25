@@ -70,6 +70,7 @@ router.post("/delete", (req, res) => {
     .exec()
     .then(() => {
       Post.findOneAndUpdate(
+        // 해당 포스트 내 댓글 개수 줄이기.
         {
           _id: req.body.postId,
         },
