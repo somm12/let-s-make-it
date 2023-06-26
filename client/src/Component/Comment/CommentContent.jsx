@@ -78,7 +78,20 @@ const CommentContent = ({ comment }) => {
     <div>
       <div className={style.commentBox}>
         <div className={style.commentContent}>
-          <h5>{comment.author.displayName}</h5>
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <img
+              style={{
+                width: "25px",
+                height: "25px",
+                "border-radius": "50%",
+                marginRight: "5px",
+              }}
+              src={comment.author.photoURL}
+              alt=""
+            />
+            <h5>{comment.author.displayName}</h5>
+          </div>
+
           {editFlag ? (
             <div>
               <input

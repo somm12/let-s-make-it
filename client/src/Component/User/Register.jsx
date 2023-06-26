@@ -32,12 +32,16 @@ const Register = () => {
 
     await createdUser.user.updateProfile({
       displayName: name,
+      photoURL:
+        "https://kr.object.ncloudstorage.com/letsmakeit/user/92190016.JPG",
     });
     console.log(createdUser.user);
     let body = {
       email: createdUser.user.multiFactor.user.email,
       displayName: createdUser.user.multiFactor.user.displayName,
       uid: createdUser.user.multiFactor.user.uid,
+      photoURL:
+        "https://kr.object.ncloudstorage.com/letsmakeit/user/92190016.JPG",
       returnSecureToken: true,
     };
 

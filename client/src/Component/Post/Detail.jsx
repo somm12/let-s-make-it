@@ -29,11 +29,21 @@ const Detail = ({ post }) => {
         });
     }
   };
+
   return (
     <PostWrapperDiv>
       <PostDiv>
         <div className="title">{post.title}</div>
-        <div className="author">작성자: {post.author.displayName}</div>
+        <div className="userInfo" style={{ display: "flex" }}>
+          <div style={{ width: "25px", marginRight: "5px" }}>
+            <img
+              style={{ "border-radius": "50%" }}
+              src={post.author.photoURL}
+            />
+          </div>
+          <div className="author">작성자: {post.author.displayName}</div>
+        </div>
+
         {post.image && (
           <img style={{ width: "500px" }} src={post.image} alt="" />
         )}
