@@ -17,6 +17,7 @@ const Login = () => {
   useEffect(() => {
     firebase.auth().onAuthStateChanged((userInfo) => {
       // 현재 로그인한 유저의 정보.
+
       if (userInfo !== null) {
         dispatch(loginUser(userInfo.multiFactor.user));
       } else {

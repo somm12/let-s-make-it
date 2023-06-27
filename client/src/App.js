@@ -9,6 +9,7 @@ import FetchPost from "./Component/Post/FetchPost";
 import Edit from "./Component/Post/Edit";
 import Login from "./Component/User/Login";
 import Register from "./Component/User/Register";
+import MyPage from "./Component/User/MyPage";
 
 import firebase from "./firebase.js";
 import { useSelector, useDispatch } from "react-redux";
@@ -22,7 +23,7 @@ const App = () => {
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged((userInfo) => {
-      console.log(userInfo);
+      console.log(userInfo, "유저");
       // 현재 로그인한 유저의 정보.
       if (userInfo !== null) {
         dispatch(loginUser(userInfo.multiFactor.user));
@@ -47,6 +48,7 @@ const App = () => {
         <Route path="/edit/:postNum" element={<Edit />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/register" element={<Register />}></Route>
+        <Route path="/mypage" element={<MyPage />}></Route>
       </Routes>
     </>
   );

@@ -51,6 +51,12 @@ const UploadForm = styled.form`
     }
     padding-left: 0.5rem;
   }
+
+  img {
+    width: 100px;
+    height: 100px;
+    border-radius: 0;
+  }
 `;
 
 const UploadDiv = styled.div`

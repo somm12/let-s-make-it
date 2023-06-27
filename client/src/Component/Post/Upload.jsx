@@ -65,6 +65,7 @@ const Upload = ({ list, setList }) => {
         <label htmlFor="label">제목</label>
         <input id="title" value={title} onChange={onChangeText} />
         <ImageUpload setImage={setImage} />
+        {image && <img src={image} alt="" />}
         <label htmlFor="content">내용</label>
         <textarea id="content" value={content} onChange={onChangeContent} />
         <UploadButtonDiv>

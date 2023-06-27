@@ -5,7 +5,6 @@ import axios from "axios";
 import { useNavigate } from "react-router";
 
 const Upload = ({ postId }) => {
-  const navigate = useNavigate();
   const user = useSelector((state) => state.user);
   const [comment, setComment] = useState("");
 

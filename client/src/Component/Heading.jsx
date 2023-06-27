@@ -54,12 +54,24 @@ const Heading = () => {
             style={{ justifyContent: "end" }}
           >
             {user.accessToken ? (
-              <Navbar.Text
-                onClick={logOut}
-                style={{ color: "white", cursor: "pointer" }}
-              >
-                LogOut
-              </Navbar.Text>
+              <>
+                <Navbar.Text
+                  onClick={logOut}
+                  style={{ color: "white", cursor: "pointer" }}
+                >
+                  LogOut
+                </Navbar.Text>
+                <Link
+                  to="/mypage"
+                  style={{
+                    textDecoration: "none",
+                    color: "white",
+                    margin: "5px",
+                  }}
+                >
+                  MyPage
+                </Link>
+              </>
             ) : (
               <Link
                 to="/login"

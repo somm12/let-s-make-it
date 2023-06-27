@@ -1,8 +1,7 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import { useSelector } from "react-redux";
 import { useEditComment, useDeleteComment } from "../commentAPI";
-// import style from "./CommentContent.module.scss";
-import "../../../Style/Comment/commentContent.css";
+import style from "./CommentContent.module.scss";
 
 const CommentContent = ({ comment }) => {
   const user = useSelector((state) => state.user);
@@ -77,9 +76,9 @@ const CommentContent = ({ comment }) => {
 
   return (
     <div>
-      <div className="commentBox">
-        <div className="commentContent">
-          <div className="profile">
+      <div className={style.commentBox}>
+        <div className={style.commentContent}>
+          <div className={style.profile}>
             <img src={comment.author.photoURL} alt="" />
             <h5>{comment.author.displayName}</h5>
           </div>
