@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useGetComments } from "./commentAPI";
-import CommentContent from "./CommentContent";
+import CommentContent from "./CommentContent/CommentContent";
 
 const List = ({ postId }) => {
   const [commentList, setCommentList] = useState([]);

@@ -1,7 +1,9 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import { useSelector } from "react-redux";
-import { useEditComment, useDeleteComment } from "./commentAPI";
-import style from "../../Style/Comment/list.module.scss";
+import { useEditComment, useDeleteComment } from "../commentAPI";
+// import style from "./CommentContent.module.scss";
+import "../../../Style/Comment/commentContent.css";
+
 const CommentContent = ({ comment }) => {
   const user = useSelector((state) => state.user);
   const ref = useRef();
@@ -28,7 +30,7 @@ const CommentContent = ({ comment }) => {
   };
   useEffect(() => {
     document.addEventListener("mousedown", modalCloseHandler);
-    console.log("Afadfaadf");
+
     // Cleanup the event listener, unmount 될 때, evenListener 제거해주기.
     return () => {
       document.removeEventListener("mousedown", modalCloseHandler);
@@ -75,19 +77,10 @@ const CommentContent = ({ comment }) => {
 
   return (
     <div>
-      <div className={style.commentBox}>
-        <div className={style.commentContent}>
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <img
-              style={{
-                width: "25px",
-                height: "25px",
-                borderRadius: "50%",
-                marginRight: "5px",
-              }}
-              src={comment.author.photoURL}
-              alt=""
-            />
+      <div className="commentBox">
+        <div className="commentContent">
+          <div className="profile">
+            <img src={comment.author.photoURL} alt="" />
             <h5>{comment.author.displayName}</h5>
           </div>
 
@@ -113,22 +106,19 @@ const CommentContent = ({ comment }) => {
           )}
         </div>
         {user.uid === comment.author.uid && (
-          <div className={style.commentControl}>
+          <div>
             <h3 onClick={() => setModalFlag(true)}>...</h3>
             {modalFlag && (
-              <div className={style.controlModal} ref={ref}>
+              <div ref={ref}>
                 <p
                   onClick={() => {
                     setEditFlag(true);
                     setModalFlag(false);
                   }}
-                  className={style.editText}
                 >
                   수정
                 </p>
-                <p className={style.deleteText} onClick={commentDeleteHandler}>
-                  삭제
-                </p>
+                <p onClick={commentDeleteHandler}>삭제</p>
               </div>
             )}
           </div>

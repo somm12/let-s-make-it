@@ -9,38 +9,29 @@ const Upload = ({ postId }) => {
   const user = useSelector((state) => state.user);
   const [comment, setComment] = useState("");
 
-  const { mutate, isSuccess } = useSubmitComment(postId, user.uid, comment);
+  const { mutateAsync: submitAsync } = useSubmitComment(
+    postId,
+    user.uid,
+    comment
+  );
 
-  useEffect(() => {
-    if (isSuccess) {
-      setComment("");
-    }
-  }, [isSuccess]);
-
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
     if (!comment) {
       alert("댓글을 작성해주세요!");
     }
-    mutate();
-
-    // let body = {
-    //   postId: postId,
-    //   uid: user.uid,
-    //   comment,
-    // };
-    // try {
-    //   const data = await axios.post("/api/comment/submit", body);
-    //   if (data.data.success) {
-    //     // setComment("");
-    //     alert("댓글이 등록되었습니다!");
-    //     window.location.reload();
-    //   } else {
-    //     alert("댓글 등록에 실패했습니다!");
-    //   }
-    // } catch (e) {
-    //   console.log(e.error);
-    // }
+    try {
+      const {
+        data: { success },
+      } = await submitAsync();
+      console.log(success);
+      if (success) {
+        setComment("");
+        alert("댓글 작성이 완료되었습니다!");
+      }
+    } catch (error) {
+      alert("댓글 작성에 실패했습니다!");
+    }
   };
 
   return (
