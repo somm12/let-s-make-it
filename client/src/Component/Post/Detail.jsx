@@ -36,10 +36,7 @@ const Detail = ({ post }) => {
         <div className="title">{post.title}</div>
         <div className="userInfo" style={{ display: "flex" }}>
           <div style={{ width: "25px", marginRight: "5px" }}>
-            <img
-              style={{ "border-radius": "50%" }}
-              src={post.author.photoURL}
-            />
+            <img style={{ borderRadius: "50%" }} src={post.author.photoURL} />
           </div>
           <div className="author">작성자: {post.author.displayName}</div>
         </div>

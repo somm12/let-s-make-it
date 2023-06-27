@@ -9,17 +9,18 @@ const CommentContent = ({ comment }) => {
   const [newComment, setNewComment] = useState("");
   const [editFlag, setEditFlag] = useState(false);
   // 수정요청 mutate 반환.
-  const {
-    mutate: editMutate,
-    isSuccess: isEditSuccess,
-    isError: isEditError,
-  } = useEditComment(comment.postId, user.uid, newComment, comment._id);
+  const { mutateAsync: editMutateAsync } = useEditComment(
+    comment.postId,
+    user.uid,
+    newComment,
+    comment._id
+  );
   // 삭제 요청 mutate 반환.
-  const {
-    mutate: deleteMutate,
-    isSuccess: isDeleteSuccess,
-    isError: isDeleteError,
-  } = useDeleteComment(comment.postId, user.uid, comment._id);
+  const { mutateAsync: deleteMutateAsync } = useDeleteComment(
+    comment.postId,
+    user.uid,
+    comment._id
+  );
 
   const modalCloseHandler = ({ target }) => {
     // 모달이 열려있고, ref 영역이 아닌 영역클릭시, 모달 닫기.
@@ -34,45 +35,43 @@ const CommentContent = ({ comment }) => {
     };
   }, [modalFlag]);
 
-  // 댓글 수정 완료 여부 확인 및 업데이트.
-  useEffect(() => {
-    if (isEditSuccess) {
-      alert("댓글 수정 완료가 되었습니다!!");
-      setNewComment("");
-      setEditFlag(false);
-      return;
-    }
-    if (isDeleteError) {
-      alert("댓글 수정에 실패했습니다!!");
-    }
-  }, [isEditSuccess]);
-
-  const submitEditHandler = (e) => {
+  const submitEditHandler = async (e) => {
     e.preventDefault();
     if (!newComment) {
       alert("댓글을 작성해주세요!");
     }
-    editMutate();
+
+    try {
+      const {
+        data: { success },
+      } = await editMutateAsync();
+      if (success) {
+        setNewComment("");
+        setEditFlag(false);
+        alert("댓글 수정이 완료되었습니다!");
+      }
+    } catch (error) {
+      alert("댓글 수정에 실패했습니다!");
+    }
   };
 
-  const commentDeleteHandler = (e) => {
+  const commentDeleteHandler = async (e) => {
     e.preventDefault();
-    setModalFlag(false);
     if (window.confirm("정말로 삭제하시겠습니까? ")) {
-      deleteMutate();
+      try {
+        const {
+          data: { success },
+        } = await deleteMutateAsync();
+
+        if (success) {
+          setModalFlag(false);
+          alert("댓글이 삭제되었습니다!");
+        }
+      } catch (error) {
+        alert("댓글 삭제에 실패했습니다!");
+      }
     }
   };
-
-  useEffect(() => {
-    if (isDeleteSuccess) {
-      alert("댓글 삭제가 되었습니다!!");
-      setEditFlag(false);
-      return;
-    }
-    if (isDeleteError) {
-      alert("댓글 삭제에 실패했습니다!!");
-    }
-  }, [isDeleteSuccess]);
 
   return (
     <div>
@@ -83,7 +82,7 @@ const CommentContent = ({ comment }) => {
               style={{
                 width: "25px",
                 height: "25px",
-                "border-radius": "50%",
+                borderRadius: "50%",
                 marginRight: "5px",
               }}
               src={comment.author.photoURL}
