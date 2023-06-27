@@ -1,6 +1,7 @@
 import express from "express";
 import User from "../Model/User.js";
 import Counter from "../Model/Counter.js";
+import setUpload from "../Util/upload.js";
 const router = express.Router();
 
 router.post("/signUp", (req, res) => {
@@ -41,4 +42,25 @@ router.post("/nameCheck", (req, res) => {
       console.log(err);
     });
 });
+
+router.post("/profile/edit", setUpload("letsmakeit/user"), (req, res) => {
+  res.status(200).json({ success: true, filePath: res.req.file.location });
+});
+
+router.post("/profile/save", (req, res) => {
+  console.log(req.body, "여기");
+  let temp = {
+    photoURL: req.body.photoURL,
+  };
+  User.updateOne({ uid: req.body.uid }, { $set: temp })
+    .exec()
+    .then(() => {
+      res.status(200).json({ success: true });
+    })
+    .catch((err) => {
+      res.status(400).json({ success: false });
+      console.log(err);
+    });
+});
+
 export default router;
