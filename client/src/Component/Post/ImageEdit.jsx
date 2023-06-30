@@ -3,6 +3,7 @@ import { Form } from "react-bootstrap";
 import axios from "axios";
 const ImageEdit = ({ image, setImage }) => {
   const fileUpload = (e) => {
+    console.log(image, "AFSAFDSdsafafsd");
     const formData = new FormData();
     formData.append("file", e.target.files[0]);
     axios.post("/api/post/image/upload", formData).then((response) => {
@@ -19,7 +20,7 @@ const ImageEdit = ({ image, setImage }) => {
         accept="image/*"
         className="shadow-none"
       />
-      <img src={`http://localhost:5000/${image}`} alt="" />
+      <img src={`${image}`} alt="" />
     </div>
   );
 };

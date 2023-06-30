@@ -2,6 +2,7 @@ import axios from "axios";
 import React from "react";
 import { useSelector } from "react-redux";
 import { useParams, useNavigate, Link } from "react-router-dom";
+
 import { PostDiv, BtnDiv, PostWrapperDiv } from "../../Style/DetailCSS.js";
 const Detail = ({ post }) => {
   const user = useSelector((state) => state.user);

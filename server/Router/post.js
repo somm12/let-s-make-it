@@ -38,8 +38,15 @@ router.post("/submit", (req, res) => {
     });
 });
 
-router.get("/list", (req, res) => {
+router.post("/list", (req, res) => {
+  let sort = {};
+  if (req.body.sort === "최신순") {
+    sort.createdAt = -1;
+  } else {
+    sort.commentNum = -1;
+  }
   Post.find()
+    .sort(sort)
     .populate("author")
     .exec()
     .then((doc) => {

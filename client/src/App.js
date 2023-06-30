@@ -3,13 +3,13 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import Heading from "./Component/Heading";
-import List from "./Component/Post/List";
 import Upload from "./Component/Post/Upload";
 import FetchPost from "./Component/Post/FetchPost";
 import Edit from "./Component/Post/Edit";
 import Login from "./Component/User/Login";
 import Register from "./Component/User/Register";
 import MyPage from "./Component/User/MyPage";
+import MainPage from "./Component/MainPage";
 
 import firebase from "./firebase.js";
 import { useSelector, useDispatch } from "react-redux";
@@ -39,7 +39,7 @@ const App = () => {
       <Heading />
 
       <Routes>
-        <Route path="/" element={<List list={list} />}></Route>
+        <Route path="/" element={<MainPage />}></Route>
         <Route
           path="/upload"
           element={<Upload list={list} setList={setList} />}

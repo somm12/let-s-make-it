@@ -1,25 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { ListDiv } from "../../Style/ListCSS.js";
+import moment from "moment";
+import "moment/locale/ko";
 
-import axios from "axios";
-
-const List = ({ list }) => {
-  const [text, setText] = useState("");
-  const [postList, setPostList] = useState([]);
-
-  useEffect(() => {
-    axios
-      .get("/api/post/list")
-      .then((res) => {
-        if (res.data.success) {
-          setPostList([...res.data.postList]);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+const List = ({ postList }) => {
+  const user = useSelector((state) => state.user);
+  const updatedTime = (created, updated) => {
+    if (created === updated)
+      return moment(created).format("YYYY년 MMMM Do a hh:mm ");
+    return moment(updated).format("YYYY년 MMMM Do a hh:mm (수정됨)");
+  };
   return (
     <div>
       <h1>list!</h1>
@@ -27,10 +19,16 @@ const List = ({ list }) => {
       {postList.map((post, idx) => (
         <ListDiv key={post._id}>
           <Link to={`/post/${post.postNum}`}>
-            <h1>제목 : {post.title}</h1>
-            <h2>작성자: {post.author.displayName}</h2>
-            <h2>내용 : {post.content}</h2>
+            <h4>{post.title}</h4>
+            <div>
+              <img className="userProfile" src={post.author.photoURL} alt="" />
+              {post.author.displayName}
+            </div>
+            <h5>{post.content}</h5>
           </Link>
+          <div>
+            <p>{updatedTime(post.createdAt, post.updatedAt)}</p>
+          </div>
         </ListDiv>
       ))}
     </div>
