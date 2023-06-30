@@ -39,13 +39,19 @@ router.post("/submit", (req, res) => {
 });
 
 router.post("/list", (req, res) => {
+  console.log(req.body, "출력.");
   let sort = {};
   if (req.body.sort === "최신순") {
     sort.createdAt = -1;
   } else {
     sort.commentNum = -1;
   }
-  Post.find()
+  Post.find({
+    $or: [
+      { title: { $regex: req.body.searchTerm } },
+      { content: { $regex: req.body.searchTerm } },
+    ],
+  })
     .sort(sort)
     .populate("author")
     .exec()
