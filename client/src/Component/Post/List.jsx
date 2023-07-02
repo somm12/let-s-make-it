@@ -13,11 +13,9 @@ const List = ({ postList }) => {
   };
 
   return (
-    <div>
-      <h1>list!</h1>
-
+    <div className="postListWrapper">
       {postList.map((post, idx) => (
-        <ListDiv key={post._id}>
+        <ListDiv className="eachPost" key={post._id}>
           <Link to={`/post/${post.postNum}`}>
             <h4>{post.title}</h4>
             <div>

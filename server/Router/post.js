@@ -47,7 +47,7 @@ router.post("/list", (req, res) => {
     sort.commentNum = -1;
     sort._id = 1; // 댓글 개수가 동일할 때, 중복될 경우를 위해서 unique field로 기준 추가.
   }
-  console.log(sort, "!!!!!!!!", req.body.skip);
+
   Post.find({
     $or: [
       { title: { $regex: req.body.searchTerm } },
@@ -115,32 +115,6 @@ router.delete("/delete", (req, res) => {
       console.log(err);
     });
 });
-
-// const storage = multer.diskStorage({
-//   destination: function (req, file, cb) {
-//     cb(null, "image/");
-//   },
-//   filename: function (req, file, cb) {
-//     // 한글 파일명 유지.
-//     file.originalname = Buffer.from(file.originalname, "latin1").toString(
-//       "utf8"
-//     );
-//     cb(null, Date.now() + "-" + file.originalname);
-//   },
-// });
-
-// const upload = multer({ storage: storage }).single("file");
-
-// router.post("/image/upload", (req, res) => {
-//   upload(req, res, (err) => {
-//     if (err) {
-//       console.log(err);
-//       res.status(400).json({ success: false });
-//     } else {
-//       res.status(200).json({ success: true, filePath: res.req.file.path });
-//     }
-//   });
-// });
 
 router.post("/image/upload", setUpload("letsmakeit/post"), (req, res) => {
   res.status(200).json({ success: true, filePath: res.req.file.location });
