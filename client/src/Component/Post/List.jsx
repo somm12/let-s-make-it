@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { ListDiv } from "../../Style/ListCSS.js";
@@ -6,12 +6,12 @@ import moment from "moment";
 import "moment/locale/ko";
 
 const List = ({ postList }) => {
-  const user = useSelector((state) => state.user);
   const updatedTime = (created, updated) => {
     if (created === updated)
       return moment(created).format("YYYY년 MMMM Do a hh:mm ");
     return moment(updated).format("YYYY년 MMMM Do a hh:mm (수정됨)");
   };
+
   return (
     <div>
       <h1>list!</h1>

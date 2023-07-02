@@ -45,7 +45,9 @@ router.post("/list", (req, res) => {
     sort.createdAt = -1;
   } else {
     sort.commentNum = -1;
+    sort._id = 1; // 댓글 개수가 동일할 때, 중복될 경우를 위해서 unique field로 기준 추가.
   }
+  console.log(sort, "!!!!!!!!", req.body.skip);
   Post.find({
     $or: [
       { title: { $regex: req.body.searchTerm } },
@@ -54,6 +56,8 @@ router.post("/list", (req, res) => {
   })
     .sort(sort)
     .populate("author")
+    .skip(req.body.skip)
+    .limit(5)
     .exec()
     .then((doc) => {
       console.log(doc);

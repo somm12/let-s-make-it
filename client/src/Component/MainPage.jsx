@@ -9,16 +9,45 @@ const MainPage = () => {
   const [postList, setPostList] = useState([]);
   const [sort, setSort] = useState("최신순");
   const [searchTerm, setSearchTerm] = useState("");
+  const [skip, setSkip] = useState(0);
+  const [loadMore, setLoadMore] = useState(true); // 더 불러오기 버튼 비활성화.
 
-  const getPost = () => {
+  const getPostLoadMore = () => {
     let body = {
       sort,
       searchTerm,
+      skip,
+    };
+    console.log(body, "바디ㅣㅣ이");
+    axios
+      .post("/api/post/list", body)
+      .then((res) => {
+        if (res.data.success) {
+          setSkip(skip + res.data.postList.length);
+          setPostList([...postList, ...res.data.postList]);
+          if (res.data.postList.length < 5) setLoadMore(false);
+          else setLoadMore(true);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const getPost = () => {
+    // setPostList([]);
+    setSkip(0);
+    let body = {
+      sort,
+      searchTerm,
+      skip: 0,
     };
     axios
       .post("/api/post/list", body)
       .then((res) => {
         if (res.data.success) {
+          if (res.data.postList.length < 5) setLoadMore(false);
+          else setLoadMore(true);
+          setSkip(res.data.postList.length);
           setPostList([...res.data.postList]);
         }
       })
@@ -28,6 +57,7 @@ const MainPage = () => {
   };
   const searchHandler = (e) => {
     if (e.keyCode === 13) {
+      // enter 누르면 post API 요청.
       getPost();
     }
   };
@@ -35,6 +65,7 @@ const MainPage = () => {
   useEffect(() => {
     getPost();
   }, [sort]);
+
   return (
     <div>
       <FindContainerDiv>
@@ -56,6 +87,7 @@ const MainPage = () => {
       </FindContainerDiv>
 
       <List postList={postList} />
+      {loadMore && <button onClick={getPostLoadMore}>더 불러오기</button>}
     </div>
   );
 };

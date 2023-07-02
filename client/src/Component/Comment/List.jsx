@@ -7,9 +7,7 @@ const List = ({ postId }) => {
   const [commentList, setCommentList] = useState([]);
   console.log(postId);
   const { data, isFetching } = useGetComments(postId);
-  // setCommentList([...data?.data?.data?.commentList]);
-  console.log(data?.data?.commentList);
-  console.log(isFetching, "?");
+
   useEffect(() => {
     if (!isFetching) {
       setCommentList(data?.data?.commentList);

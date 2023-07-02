@@ -2,6 +2,8 @@ import React, { useState, useRef, useEffect, useCallback } from "react";
 import { useSelector } from "react-redux";
 import { useEditComment, useDeleteComment } from "../commentAPI";
 import style from "./CommentContent.module.scss";
+import moment from "moment";
+import "moment/locale/ko";
 
 const CommentContent = ({ comment }) => {
   const user = useSelector((state) => state.user);
@@ -9,6 +11,11 @@ const CommentContent = ({ comment }) => {
   const [modalFlag, setModalFlag] = useState(false);
   const [newComment, setNewComment] = useState("");
   const [editFlag, setEditFlag] = useState(false);
+  const updatedTime = (created, updated) => {
+    if (created === updated)
+      return moment(created).format("YYYY년 MMMM Do a hh:mm ");
+    return moment(updated).format("YYYY년 MMMM Do a hh:mm (수정됨)");
+  };
   // 수정요청 mutate 반환.
   const { mutateAsync: editMutateAsync } = useEditComment(
     comment.postId,
@@ -82,6 +89,7 @@ const CommentContent = ({ comment }) => {
             <img src={comment.author.photoURL} alt="" />
             <h5>{comment.author.displayName}</h5>
           </div>
+          <p>{updatedTime(comment.createdAt, comment.updatedAt)}</p>
 
           {editFlag ? (
             <div>

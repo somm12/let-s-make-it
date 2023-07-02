@@ -37,6 +37,7 @@ router.get("/list/:postId", (req, res) => {
   Comment.find({
     postId,
   })
+    .sort({ createdAt: -1 })
     .populate("author")
     .exec()
     .then((docs) => {
