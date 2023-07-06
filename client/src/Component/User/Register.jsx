@@ -29,7 +29,7 @@ const Register = () => {
     let createdUser = await firebase
       .auth()
       .createUserWithEmailAndPassword(email, password);
-
+    // 기본 프로필 이미지 할당.
     await createdUser.user.updateProfile({
       displayName: name,
       photoURL:

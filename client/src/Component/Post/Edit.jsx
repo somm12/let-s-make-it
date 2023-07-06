@@ -26,48 +26,50 @@ const Edit = () => {
     } = e;
     setTitle(value);
   };
-  const onSubmitPost = (e) => {
+  const onSubmitPost = async (e) => {
     e.preventDefault();
     if (content === "" || title === "") {
       alert("제목 내용 모두 입력해주세요");
       return;
     }
-    console.log(image, "업로드");
+
     const body = { title, content, postNum: post.postNum, image };
-    console.log(body);
-    axios
-      .post("/api/post/edit", body)
-      .then((res) => {
-        if (res.data.success) {
-          alert("성공적으로 수정에 성공했습니다");
-          navigate(`/post/${post.postNum}`);
-          return;
-        }
-        alert("수정 실패!");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+
+    try {
+      const { data } = await axios.post("/api/post/edit", body);
+      if (data.success) {
+        alert("성공적으로 수정에 성공했습니다");
+        navigate(`/post/${post.postNum}`);
+        return;
+      }
+      alert("수정 실패!");
+    } catch (e) {
+      console.log(e);
+    }
   };
-  useEffect(() => {
+
+  const getPostDetail = async () => {
     let body = {
       postNum: params.postNum,
     };
-    axios
-      .post("/api/post/detail", body)
-      .then((res) => {
-        if (res.data.success) {
-          console.log(res.data.post);
-          setPost(res.data.post);
-          setContent(res.data.post.content);
-          setTitle(res.data.post.title);
-          setImage(res.data.post.image);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+
+    try {
+      const { data } = await axios.post("/api/post/detail", body);
+      if (data.success) {
+        setPost(data.post);
+        setContent(data.post.content);
+        setTitle(data.post.title);
+        setImage(data.post.image);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    getPostDetail(); // 포스트 정보 들고오기.
   }, []);
+
   const onCancel = (e) => {
     e.preventDefault();
     navigate(-1);

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import firebase from "../../firebase.js";
 import { loginUser, clearUser } from "../../Reducer/userSlice";
 import axios from "axios";
@@ -35,6 +34,7 @@ const MyPage = () => {
 
   const submitProfile = async (e) => {
     e.preventDefault();
+    let body = { photoURL: profile, uid: user.uid };
 
     try {
       await firebase.auth().currentUser.updateProfile({
@@ -45,20 +45,16 @@ const MyPage = () => {
       console.log(error);
     }
 
-    let body = { photoURL: profile, uid: user.uid };
-    axios
-      .post("/api/user/profile/save", body)
-      .then((res) => {
-        if (res.data.success) {
-          alert("프로필이 변경 되었습니다");
-          //   window.location.reload();
-          return;
-        }
-        alert("변경 실패!");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    try {
+      const { data } = await axios.post("/api/user/profile/save", body);
+      if (data.success) {
+        alert("프로필이 변경 되었습니다");
+        return;
+      }
+      alert("변경실패!");
+    } catch (e) {
+      console.log(e);
+    }
   };
   return (
     <div>

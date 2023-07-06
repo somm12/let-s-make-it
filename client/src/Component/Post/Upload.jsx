@@ -34,29 +34,25 @@ const Upload = ({ list, setList }) => {
     } = e;
     setTitle(value);
   };
-  const onSubmitPost = (e) => {
+  const onSubmitPost = async (e) => {
     e.preventDefault();
     if (content === "" || title === "") {
       alert("제목 내용 모두 입력해주세요");
       return;
     }
     const body = { title, content, image, uid: user.uid };
-    axios
-      .post("/api/post/submit", body)
-      .then((res) => {
-        if (res.data.success) {
-          alert("성공적으로 제출에 성공했습니다");
-          navigate("/");
-          return;
-        }
-        alert("제출 실패!");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    setList([...list, content]);
-    setContent("");
-    setTitle("");
+
+    try {
+      const { data } = await axios.post("/api/post/submit", body);
+      if (data.success) {
+        alert("성공적으로 제출에 성공했습니다");
+        navigate("/");
+        return;
+      }
+      alert("제출 실패!");
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (

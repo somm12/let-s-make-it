@@ -54,10 +54,10 @@ router.post("/list", (req, res) => {
       { content: { $regex: req.body.searchTerm } },
     ],
   })
-    .sort(sort)
-    .populate("author")
-    .skip(req.body.skip)
-    .limit(5)
+    .sort(sort) // 정렬 기준으로 글을 정렬.
+    .populate("author") // 타 collection 참조.
+    .skip(req.body.skip) // n개 건너뛰기.
+    .limit(5) // 그 중 5개만.
     .exec()
     .then((doc) => {
       console.log(doc);

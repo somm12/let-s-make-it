@@ -12,48 +12,43 @@ const MainPage = () => {
   const [skip, setSkip] = useState(0);
   const [loadMore, setLoadMore] = useState(true); // 더 불러오기 버튼 비활성화.
 
-  const getPostLoadMore = () => {
+  const getPostLoadMore = async () => {
     let body = {
       sort,
       searchTerm,
       skip,
     };
-    console.log(body, "바디ㅣㅣ이");
-    axios
-      .post("/api/post/list", body)
-      .then((res) => {
-        if (res.data.success) {
-          setSkip(skip + res.data.postList.length);
-          setPostList([...postList, ...res.data.postList]);
-          if (res.data.postList.length < 5) setLoadMore(false);
-          else setLoadMore(true);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    try {
+      const { data } = await axios.post("/api/post/list", body);
+      if (data.success) {
+        setSkip(skip + data.postList.length);
+        setPostList([...postList, ...data.postList]);
+        if (data.postList.length < 5) setLoadMore(false);
+        else setLoadMore(true);
+      }
+    } catch (e) {
+      console.log(e);
+    }
   };
-  const getPost = () => {
-    // setPostList([]);
+  const getPost = async () => {
     setSkip(0);
     let body = {
       sort,
       searchTerm,
       skip: 0,
     };
-    axios
-      .post("/api/post/list", body)
-      .then((res) => {
-        if (res.data.success) {
-          if (res.data.postList.length < 5) setLoadMore(false);
-          else setLoadMore(true);
-          setSkip(res.data.postList.length);
-          setPostList([...res.data.postList]);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+
+    try {
+      const { data } = await axios.post("/api/post/list", body);
+      if (data.success) {
+        if (data.postList.length < 5) setLoadMore(false);
+        else setLoadMore(true);
+        setSkip(data.postList.length);
+        setPostList([...data.postList]);
+      }
+    } catch (e) {
+      console.log(e);
+    }
   };
   const searchHandler = (e) => {
     if (e.keyCode === 13) {
@@ -76,6 +71,7 @@ const MainPage = () => {
           placeholder="검색어를 입력하세요"
           type="text"
         />
+
         <DropdownButton title={sort}>
           <Dropdown.Item onClick={() => setSort("최신순")}>
             최신순

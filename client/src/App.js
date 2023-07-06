@@ -16,7 +16,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { loginUser, clearUser } from "./Reducer/userSlice";
 
 const App = () => {
-  const [list, setList] = useState([]);
   const user = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
@@ -40,10 +39,7 @@ const App = () => {
 
       <Routes>
         <Route path="/" element={<MainPage />}></Route>
-        <Route
-          path="/upload"
-          element={<Upload list={list} setList={setList} />}
-        ></Route>
+        <Route path="/upload" element={<Upload />}></Route>
         <Route path="/post/:postNum" element={<FetchPost />}></Route>
         <Route path="/edit/:postNum" element={<Edit />}></Route>
         <Route path="/login" element={<Login />}></Route>

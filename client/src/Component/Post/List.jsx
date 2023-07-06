@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { ListDiv } from "../../Style/ListCSS.js";
 import moment from "moment";
 import "moment/locale/ko";
 
 const List = ({ postList }) => {
   const updatedTime = (created, updated) => {
+    // 글이 업로드 또는 수정된 시간 반환.
     if (created === updated)
       return moment(created).format("YYYY년 MMMM Do a hh:mm ");
     return moment(updated).format("YYYY년 MMMM Do a hh:mm (수정됨)");

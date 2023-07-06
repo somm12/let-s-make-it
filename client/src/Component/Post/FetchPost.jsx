@@ -11,22 +11,24 @@ const FetchPost = () => {
   const [post, setPost] = useState([]);
   const [flag, setFlag] = useState(false);
 
-  useEffect(() => {
+  const fetchPost = async () => {
     let body = {
       postNum: params.postNum,
     };
-    axios
-      .post("/api/post/detail", body)
-      .then((res) => {
-        if (res.data.success) {
-          console.log(res.data.post);
-          setPost(res.data.post);
-          setFlag(true);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+
+    try {
+      const { data } = await axios.post("/api/post/detail", body);
+      if (data.success) {
+        setPost(data.post);
+        setFlag(true);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    fetchPost();
   }, []);
   return (
     <div>

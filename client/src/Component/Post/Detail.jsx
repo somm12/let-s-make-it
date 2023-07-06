@@ -8,26 +8,24 @@ const Detail = ({ post }) => {
   const user = useSelector((state) => state.user);
   let navigate = useNavigate();
   let params = useParams();
-  const deleteHandler = () => {
+  const deleteHandler = async () => {
     if (window.confirm("정말 삭제하시겠습니까?")) {
       let body = {
         postNum: params.postNum,
       };
 
-      axios
-        .delete("/api/post/delete", {
+      try {
+        const { data } = await axios.delete("/api/post/delete", {
           data: body,
-        })
-        .then((res) => {
-          if (res.data.success) {
-            alert("게시글이 삭제되었습니다.");
-            navigate("/");
-          }
-        })
-        .catch((err) => {
-          alert("게시글 삭제에 실패했습니다.");
-          console.log(err);
         });
+        if (data.success) {
+          alert("게시글이 삭제되었습니다.");
+          navigate("/");
+        }
+      } catch (e) {
+        alert("게시글 삭제에 실패했습니다.");
+        console.log(e);
+      }
     }
   };
 

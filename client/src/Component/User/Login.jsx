@@ -27,10 +27,6 @@ const Login = () => {
     });
   }, []);
 
-  useEffect(() => {
-    // firebase.auth().signOut();
-  }, []);
-
   const signIn = async (e) => {
     e.preventDefault();
 
