@@ -3,7 +3,7 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 import { PostDiv, BtnDiv, PostWrapperDiv } from "../../Style/DetailCSS.js";
 import Spinner from "react-bootstrap/Spinner";
 import Detail from "./Detail";
-import FetchComment from "../Comment/FetchComment";
+import CommentWrapper from "../Comment/CommentWrapper/CommentWrapper";
 import axios from "axios";
 const FetchPost = () => {
   let params = useParams();
@@ -35,7 +35,7 @@ const FetchPost = () => {
       {flag ? (
         <>
           <Detail post={post} />
-          <FetchComment postId={post._id} />
+          <CommentWrapper postId={post._id} />
         </>
       ) : (
         <Spinner animation="border" role="status">

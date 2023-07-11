@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useSubmitComment } from "./commentAPI";
+import { useSubmitComment } from "../commentAPI";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { useNavigate } from "react-router";
+import style from "./CommentUpload.module.scss";
 
-const Upload = ({ postId }) => {
+const CommentUpload = ({ postId }) => {
   const user = useSelector((state) => state.user);
   const [comment, setComment] = useState("");
 
@@ -34,15 +35,18 @@ const Upload = ({ postId }) => {
   };
 
   return (
-    <div>
+    <div className={style.uploadWrapper}>
       <input
         type="text"
+        placeholder="댓글을 입력해주세요"
         value={comment}
         onChange={(e) => setComment(e.currentTarget.value)}
       />
-      <button onClick={submitHandler}>등록</button>
+      <button className={style.uploadBtn} onClick={submitHandler}>
+        등록
+      </button>
     </div>
   );
 };
 
-export default Upload;
+export default CommentUpload;
