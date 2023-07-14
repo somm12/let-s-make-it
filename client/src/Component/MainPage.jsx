@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import List from "./Post/List";
+import List from "./Post/PostList/PostList";
 import axios from "axios";
 import FindContainerDiv from "../Style/MainPageCSS.js";
 import Dropdown from "react-bootstrap/Dropdown";

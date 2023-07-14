@@ -5,6 +5,7 @@ const initialState = {
   uid: "",
   accessToken: "",
   photoURL: "",
+  bookmark: [],
 };
 // redux toolkit을 사용하면 직접 할당 가능.
 export const userSlice = createSlice({
@@ -22,10 +23,24 @@ export const userSlice = createSlice({
       state.uid = "";
       state.accessToken = "";
     },
+    addBookmark: (state, action) => {
+      // 북마크 추가
+
+      state.bookmark = [...state.bookmark, action.payload.postId];
+    },
+    deleteBookmark: (state, action) => {
+      // 북마크 삭제
+      let tmp = [];
+      state.bookmark.map((id) => {
+        if (id !== action.payload.postId) tmp.push(id);
+      });
+      state.bookmark = tmp;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { loginUser, clearUser } = userSlice.actions;
+export const { loginUser, clearUser, addBookmark, deleteBookmark } =
+  userSlice.actions;
 
 export default userSlice.reducer;

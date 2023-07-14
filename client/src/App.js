@@ -8,7 +8,7 @@ import FetchPost from "./Component/Post/FetchPost";
 import Edit from "./Component/Post/Edit";
 import Login from "./Component/User/Login";
 import Register from "./Component/User/Register";
-import MyPage from "./Component/User/MyPage";
+import MyPage from "./Component/User/MyPage/MyPage";
 import MainPage from "./Component/MainPage";
 
 import firebase from "./firebase.js";
@@ -25,7 +25,14 @@ const App = () => {
       console.log(userInfo, "유저");
       // 현재 로그인한 유저의 정보.
       if (userInfo !== null) {
-        dispatch(loginUser(userInfo.multiFactor.user));
+        let user = {
+          displayName: userInfo.multiFactor.user.displayName,
+          uid: userInfo.multiFactor.user.uid,
+          accessToken: userInfo.multiFactor.user.accessToken,
+          photoURL: userInfo.multiFactor.user.photoURL,
+        };
+
+        dispatch(loginUser(user));
       } else {
         // 현재 유저 정보가 없다면, 로그인 상태가 아니므로, user store를 비운다.
         dispatch(clearUser());

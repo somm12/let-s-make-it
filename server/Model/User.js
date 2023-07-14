@@ -7,6 +7,7 @@ const userSchema = new mongoose.Schema(
     uid: String,
     returnSecureToken: Boolean,
     photoURL: String,
+    bookmarks: Array,
   },
   { collection: "users" }
 );

@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 
 const ListDiv = styled.div`
-  display: flex;
+  // display: flex;
   justify-content: space-between;
   align-items: center;
   color: grey;
@@ -11,7 +11,10 @@ const ListDiv = styled.div`
   a {
     text-decoration: none;
     color: black;
-    width: 100%;
+  }
+
+  img {
+    width: 200px;
   }
 
   box-shadow: 1px 2px gray;
@@ -21,6 +24,8 @@ const ListDiv = styled.div`
     margin-right: 10px;
   }
   .postListWrapper {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(100px, auto));
   }
 `;
 

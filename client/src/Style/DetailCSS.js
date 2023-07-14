@@ -19,6 +19,15 @@ const PostDiv = styled.div`
     width: 100%;
     height: auto;
   }
+  .titleHeadline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .bookmarkBtn {
+    background-color: white;
+    border: 0;
+  }
 `;
 const BtnDiv = styled.div`
   margin-top: 1rem;

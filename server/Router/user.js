@@ -63,4 +63,36 @@ router.post("/profile/save", (req, res) => {
     });
 });
 
+router.post("/bookmark/add", (req, res) => {
+  console.log(req.body, "북마크 등록 요청 받기");
+
+  User.updateOne(
+    { uid: req.body.uid },
+    { $push: { bookmarks: req.body.postId } }
+  )
+    .exec()
+    .then(() => {
+      res.status(200).json({ success: true });
+    })
+    .catch((err) => {
+      res.status(400).json({ success: false });
+      console.log(err);
+    });
+});
+
+router.post("/bookmark/delete", (req, res) => {
+  console.log(req.body, "북마크 삭제 요청 받기");
+  User.updateOne(
+    { uid: req.body.uid },
+    { $pull: { bookmarks: req.body.postId } }
+  )
+    .exec()
+    .then(() => {
+      res.status(200).json({ success: true });
+    })
+    .catch((err) => {
+      res.status(400).json({ success: false });
+      console.log(err);
+    });
+});
 export default router;

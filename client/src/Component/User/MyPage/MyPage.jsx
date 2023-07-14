@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import firebase from "../../firebase.js";
-import { loginUser, clearUser } from "../../Reducer/userSlice";
+import firebase from "../../../firebase.js";
+import { loginUser, clearUser } from "../../../Reducer/userSlice";
 import axios from "axios";
+import style from "./MyPage.module.scss";
+
 const MyPage = () => {
   const user = useSelector((state) => state.user);
   const [profile, setProfile] = useState("");
@@ -12,7 +14,14 @@ const MyPage = () => {
   useEffect(() => {
     firebase.auth().onAuthStateChanged((userInfo) => {
       if (userInfo !== null) {
-        dispatch(loginUser(userInfo.multiFactor.user));
+        let user = {
+          displayName: userInfo.multiFactor.user.displayName,
+          uid: userInfo.multiFactor.user.uid,
+          accessToken: userInfo.multiFactor.user.accessToken,
+          photoURL: userInfo.multiFactor.user.photoURL,
+        };
+
+        dispatch(loginUser(user));
       } else {
         dispatch(clearUser());
       }
@@ -58,13 +67,7 @@ const MyPage = () => {
   };
   return (
     <div>
-      <form
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          paddingTop: "20px",
-        }}
-      >
+      <form className={style.form}>
         <label>
           <input
             onChange={profileChange}

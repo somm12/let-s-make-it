@@ -1,11 +1,22 @@
 import axios from "axios";
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBookmark as bookmarkSolid } from "@fortawesome/free-solid-svg-icons";
+import { faBookmark as bookmarkRegular } from "@fortawesome/free-regular-svg-icons";
+import { useSelector, useDispatch } from "react-redux";
 import { useParams, useNavigate, Link } from "react-router-dom";
+import { addBookmark, deleteBookmark } from "../../Reducer/userSlice";
 
 import { PostDiv, BtnDiv, PostWrapperDiv } from "../../Style/DetailCSS.js";
 const Detail = ({ post }) => {
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
+
+  const [isBookmark, setIsBookmark] = useState(
+    user.bookmark.some((postId) => postId === post._id)
+  );
+
+  console.log(isBookmark, "유저 정보!");
   let navigate = useNavigate();
   let params = useParams();
   const deleteHandler = async () => {
@@ -29,10 +40,60 @@ const Detail = ({ post }) => {
     }
   };
 
+  const bookmarkHandler = async (e) => {
+    e.preventDefault();
+
+    if (!isBookmark) {
+      console.log("?D");
+      // 북마크가 안되어 있다면
+      try {
+        let body = {
+          postId: post._id,
+          uid: user.uid,
+        };
+
+        const { data } = await axios.post("/api/user/bookmark/add", body);
+        if (data.success) {
+          dispatch(addBookmark({ postId: post._id }));
+          setIsBookmark((prev) => !prev);
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    }
+    // 북마크가 연결되었다면,
+    else {
+      try {
+        let body = {
+          postId: post._id,
+          uid: user.uid,
+        };
+        const { data } = await axios.post("/api/user/bookmark/delete", body);
+        console.log(data);
+        if (data.success) {
+          dispatch(deleteBookmark({ postId: post._id }));
+          setIsBookmark(!isBookmark);
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    }
+  };
   return (
     <PostWrapperDiv>
       <PostDiv>
-        <div className="title">{post.title}</div>
+        <div className="title">
+          <div className="titleHeadline">
+            <h5>{post.title}</h5>
+            <button className="bookmarkBtn" onClick={bookmarkHandler}>
+              {isBookmark ? (
+                <FontAwesomeIcon icon={bookmarkSolid} />
+              ) : (
+                <FontAwesomeIcon icon={bookmarkRegular} />
+              )}
+            </button>
+          </div>
+        </div>
         <div className="userInfo" style={{ display: "flex" }}>
           <div style={{ width: "25px", marginRight: "5px" }}>
             <img style={{ borderRadius: "50%" }} src={post.author.photoURL} />
