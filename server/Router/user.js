@@ -51,6 +51,7 @@ router.post("/profile/save", (req, res) => {
   console.log(req.body, "여기");
   let temp = {
     photoURL: req.body.photoURL,
+    displayName: req.body.displayName,
   };
   User.updateOne({ uid: req.body.uid }, { $set: temp })
     .exec()
@@ -68,7 +69,7 @@ router.post("/bookmark/add", (req, res) => {
 
   User.updateOne(
     { uid: req.body.uid },
-    { $push: { bookmarks: req.body.postId } }
+    { $push: { bookmark: req.body.postId } }
   )
     .exec()
     .then(() => {
@@ -84,7 +85,7 @@ router.post("/bookmark/delete", (req, res) => {
   console.log(req.body, "북마크 삭제 요청 받기");
   User.updateOne(
     { uid: req.body.uid },
-    { $pull: { bookmarks: req.body.postId } }
+    { $pull: { bookmark: req.body.postId } }
   )
     .exec()
     .then(() => {

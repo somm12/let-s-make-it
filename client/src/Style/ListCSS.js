@@ -1,13 +1,13 @@
 import styled from "@emotion/styled";
 
 const ListDiv = styled.div`
-  // display: flex;
   justify-content: space-between;
   align-items: center;
   color: grey;
   margin: 30px;
   border: 1px solid black;
-
+  border-radius: 20px;
+  padding: 10px;
   a {
     text-decoration: none;
     color: black;
@@ -15,6 +15,8 @@ const ListDiv = styled.div`
 
   img {
     width: 200px;
+    height: 200px;
+    border-radius: 20px;
   }
 
   box-shadow: 1px 2px gray;

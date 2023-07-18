@@ -6,13 +6,20 @@ import axios from "axios";
 import style from "./MyPage.module.scss";
 
 const MyPage = () => {
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const [profile, setProfile] = useState("");
-  console.log(user, "유저유저");
-  const dispatch = useDispatch();
+  const [displayName, setDisplayName] = useState("");
+  const [isChange, setIsChange] = useState(false);
+  console.log(isChange, "변했나요");
+  useEffect(() => {
+    setProfile(user.photoURL);
+    setDisplayName(user.displayName);
+  }, [user]);
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged((userInfo) => {
+      // 현재 로그인한 유저의 정보.
       if (userInfo !== null) {
         let user = {
           displayName: userInfo.multiFactor.user.displayName,
@@ -23,15 +30,13 @@ const MyPage = () => {
 
         dispatch(loginUser(user));
       } else {
+        // 현재 유저 정보가 없다면, 로그인 상태가 아니므로, user store를 비운다.
         dispatch(clearUser());
       }
     });
   }, []);
 
-  useEffect(() => {
-    setProfile(user.photoURL);
-  }, [user]);
-
+  console.log(displayName, user, "!!!!!");
   const profileChange = (e) => {
     const formData = new FormData();
     formData.append("file", e.target.files[0]);
@@ -39,15 +44,21 @@ const MyPage = () => {
       console.log(response.data);
       setProfile(response.data.filePath);
     });
+    setIsChange(true);
   };
 
+  const displayNameChange = (e) => {
+    setIsChange(true);
+    setDisplayName(e.target.value);
+  };
   const submitProfile = async (e) => {
     e.preventDefault();
-    let body = { photoURL: profile, uid: user.uid };
+    let body = { photoURL: profile, uid: user.uid, displayName };
 
     try {
       await firebase.auth().currentUser.updateProfile({
         photoURL: profile,
+        displayName,
       });
     } catch (error) {
       alert("프로필 변경에 실패했습니다");
@@ -65,25 +76,49 @@ const MyPage = () => {
       console.log(e);
     }
   };
+
   return (
-    <div>
-      <form className={style.form}>
-        <label>
-          <input
-            onChange={profileChange}
-            style={{ display: "none" }}
-            type="file"
-            accept="image/*"
-            className="shadow-none"
-          />
-          <img
-            style={{ width: "200px", borderRadius: "50%", cursor: "pointer" }}
-            src={profile}
-            alt=""
-          />
-        </label>
-        <button onClick={submitProfile}>저장</button>
-      </form>
+    <div className={style.myPageWrapper}>
+      <table>
+        <tbody className={style.form}>
+          <tr className={style.photoChange}>
+            <th>프로필 변경</th>
+            <td>
+              <label>
+                <input
+                  onChange={profileChange}
+                  style={{ display: "none" }}
+                  type="file"
+                  accept="image/*"
+                  className="shadow-none"
+                />
+                <img
+                  style={{
+                    width: "200px",
+                    borderRadius: "50%",
+                    cursor: "pointer",
+                  }}
+                  src={profile}
+                  alt=""
+                />
+              </label>
+            </td>
+          </tr>
+          <tr className={style.displayNameChange}>
+            <th>별명 변경</th>
+            <td>
+              <input
+                type="text"
+                onChange={displayNameChange}
+                value={displayName}
+              />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <button disabled={!isChange} onClick={submitProfile}>
+        저장
+      </button>
     </div>
   );
 };

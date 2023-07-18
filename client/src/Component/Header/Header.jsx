@@ -6,7 +6,8 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import firebase from "../firebase";
+import firebase from "../../firebase";
+import style from "./Header.module.scss";
 
 const Heading = () => {
   const user = useSelector((state) => state.user);
@@ -17,7 +18,7 @@ const Heading = () => {
     navigate("/");
   };
   return (
-    <div>
+    <div className={style.headerWrapper}>
       <Navbar bg="dark" expand="lg">
         <Container>
           <Navbar.Brand href="/" style={{ color: "white" }}>
@@ -70,6 +71,16 @@ const Heading = () => {
                   }}
                 >
                   MyPage
+                </Link>
+                <Link
+                  to="/bookmark"
+                  style={{
+                    textDecoration: "none",
+                    color: "white",
+                    margin: "5px",
+                  }}
+                >
+                  Bookmark
                 </Link>
               </>
             ) : (

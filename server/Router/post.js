@@ -119,4 +119,35 @@ router.delete("/delete", (req, res) => {
 router.post("/image/upload", setUpload("letsmakeit/post"), (req, res) => {
   res.status(200).json({ success: true, filePath: res.req.file.location });
 });
+
+router.post("/bookmark/post", (req, res) => {
+  User.findOne({ uid: req.body.uid })
+    .exec()
+    .then((userInfo) => {
+      Post.find({ _id: { $in: userInfo.bookmark } })
+        .exec()
+        .then((docs) => {
+          res.status(200).json({ success: true, bookmarkPost: docs });
+          console.log(docs);
+        })
+        .catch((err) => {
+          res.status(400).json({ success: false });
+          console.log(err);
+        });
+    });
+});
+
+router.post("/bookmark/postId", (req, res) => {
+  console.log("북마크Id get");
+  User.findOne({ uid: req.body.uid })
+    .exec()
+    .then((userInfo) => {
+      res.status(200).json({ success: true, bookmark: userInfo.bookmark });
+      console.log(userInfo, "!!");
+    })
+    .catch((err) => {
+      res.status(400).json({ success: false });
+      console.log(err);
+    });
+});
 export default router;

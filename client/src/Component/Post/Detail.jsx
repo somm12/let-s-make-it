@@ -15,6 +15,7 @@ const Detail = ({ post }) => {
   const [isBookmark, setIsBookmark] = useState(
     user.bookmark.some((postId) => postId === post._id)
   );
+  console.log(user, "!!!!!!");
 
   console.log(isBookmark, "유저 정보!");
   let navigate = useNavigate();

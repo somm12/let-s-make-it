@@ -1,7 +1,15 @@
-.form {
+.myPageWrapper {
+  width: 100%;
+  height: 93%;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+table {
+  display: flex;
   justify-content: center;
-  padding-top: 20px;
+  th {
+    width: 100px;
+    height: 100px;
+  }
 }

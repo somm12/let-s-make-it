@@ -25,7 +25,6 @@ const Login = () => {
           accessToken: userInfo.multiFactor.user.accessToken,
           photoURL: userInfo.multiFactor.user.photoURL,
         };
-        console.log(user, "!");
 
         dispatch(loginUser(user));
       } else {

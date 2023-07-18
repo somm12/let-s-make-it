@@ -23,6 +23,10 @@ export const userSlice = createSlice({
       state.uid = "";
       state.accessToken = "";
     },
+    setBookmark: (state, action) => {
+      // db로부터 북마크 초기화
+      state.bookmark = action.payload.bookmark;
+    },
     addBookmark: (state, action) => {
       // 북마크 추가
 
@@ -40,7 +44,12 @@ export const userSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { loginUser, clearUser, addBookmark, deleteBookmark } =
-  userSlice.actions;
+export const {
+  loginUser,
+  clearUser,
+  addBookmark,
+  deleteBookmark,
+  setBookmark,
+} = userSlice.actions;
 
 export default userSlice.reducer;
