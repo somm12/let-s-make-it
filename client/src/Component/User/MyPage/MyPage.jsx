@@ -36,7 +36,6 @@ const MyPage = () => {
     });
   }, []);
 
-  console.log(displayName, user, "!!!!!");
   const profileChange = (e) => {
     const formData = new FormData();
     formData.append("file", e.target.files[0]);
