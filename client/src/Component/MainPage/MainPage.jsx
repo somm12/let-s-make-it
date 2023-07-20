@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import List from "./Post/PostList/PostList";
+import List from "../Post/PostList/PostList";
 import axios from "axios";
-import FindContainerDiv from "../Style/MainPageCSS.js";
+import FindContainerDiv from "../../Style/MainPageCSS.js";
 import Dropdown from "react-bootstrap/Dropdown";
 
 import DropdownButton from "react-bootstrap/DropdownButton";
+import style from "./MainPage.module.scss";
+
 const MainPage = () => {
   const [postList, setPostList] = useState([]);
   const [sort, setSort] = useState("최신순");
@@ -107,7 +109,7 @@ const MainPage = () => {
 
       <List postList={postList} />
       {/* {loadMore && <button onClick={getPostLoadMore}>더 불러오기</button>} */}
-      <div ref={obsRef}>옵저버</div>
+      <div className={style.observer} ref={obsRef}></div>
     </div>
   );
 };

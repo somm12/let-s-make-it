@@ -10,7 +10,7 @@ import Login from "./Component/User/Login";
 import Register from "./Component/User/Register";
 import MyPage from "./Component/User/MyPage/MyPage";
 import Bookmark from "./Component/User/Bookmark/Bookmark";
-import MainPage from "./Component/MainPage";
+import MainPage from "./Component/MainPage/MainPage";
 
 import firebase from "./firebase.js";
 import { useSelector, useDispatch } from "react-redux";

@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Button } from "react-bootstrap";
@@ -7,97 +9,78 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import firebase from "../../firebase";
+
 import style from "./Header.module.scss";
 
 const Heading = () => {
   const user = useSelector((state) => state.user);
-  console.log(user);
+  const [toggleBtn, setToggleBtn] = useState(true);
   const navigate = useNavigate();
   const logOut = () => {
     firebase.auth().signOut();
     navigate("/");
   };
+
+  const handleResize = () => {
+    console.log(window.innerWidth, "크기");
+    if (window.innerWidth > 700) {
+      setToggleBtn(true);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+    return () => {
+      // cleanup
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   return (
     <div className={style.headerWrapper}>
-      <Navbar bg="dark" expand="lg">
-        <Container>
-          <Navbar.Brand href="/" style={{ color: "white" }}>
-            Let's Make It!
-          </Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      <div className={style.logoWrapper}>
+        <a className={style.serviceName} href="/" style={{ color: "white" }}>
+          Let's Make It!
+        </a>
 
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto">
-              <Link
-                to="/upload"
-                style={{
-                  textDecoration: "none",
-                  color: "white",
-                  margin: "5px",
-                }}
-              >
+        <FontAwesomeIcon
+          onClick={() => {
+            setToggleBtn(!toggleBtn);
+          }}
+          icon={faBars}
+        />
+      </div>
+      {toggleBtn && (
+        <nav>
+          <header>
+            <div className={style.userNavbar}>
+              <Link className={style.mainMenu} to="/upload">
                 Upload
               </Link>
-              <Link
-                to="/"
-                style={{
-                  textDecoration: "none",
-                  color: "white",
-                  margin: "5px",
-                }}
-              >
+              <Link className={style.mainMenu} to="/">
                 Home
               </Link>
-            </Nav>
-          </Navbar.Collapse>
-          <Navbar.Collapse
-            className="loginNavbar"
-            style={{ justifyContent: "end" }}
-          >
-            {user.accessToken ? (
-              <>
-                <Navbar.Text
-                  onClick={logOut}
-                  style={{ color: "white", cursor: "pointer" }}
-                >
-                  LogOut
-                </Navbar.Text>
-                <Link
-                  to="/mypage"
-                  style={{
-                    textDecoration: "none",
-                    color: "white",
-                    margin: "5px",
-                  }}
-                >
-                  MyPage
+
+              {user.accessToken ? (
+                <>
+                  <Link className={style.userMenu} to="/mypage">
+                    MyPage
+                  </Link>
+                  <Link className={style.userMenu} to="/bookmark">
+                    Bookmark
+                  </Link>
+                  <div className={style.userMenu} onClick={logOut}>
+                    LogOut
+                  </div>
+                </>
+              ) : (
+                <Link className={style.userMenu} to="/login">
+                  Login
                 </Link>
-                <Link
-                  to="/bookmark"
-                  style={{
-                    textDecoration: "none",
-                    color: "white",
-                    margin: "5px",
-                  }}
-                >
-                  Bookmark
-                </Link>
-              </>
-            ) : (
-              <Link
-                to="/login"
-                style={{
-                  textDecoration: "none",
-                  color: "white",
-                  margin: "5px",
-                }}
-              >
-                Login
-              </Link>
-            )}
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
+              )}
+            </div>
+          </header>
+        </nav>
+      )}
     </div>
   );
 };

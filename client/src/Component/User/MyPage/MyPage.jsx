@@ -11,7 +11,7 @@ const MyPage = () => {
   const [profile, setProfile] = useState("");
   const [displayName, setDisplayName] = useState("");
   const [isChange, setIsChange] = useState(false);
-  console.log(isChange, "변했나요");
+
   useEffect(() => {
     setProfile(user.photoURL);
     setDisplayName(user.displayName);

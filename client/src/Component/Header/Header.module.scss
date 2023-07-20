@@ -1,3 +1,65 @@
 .headerWrapper {
+  background-color: #dcbb63;
   height: 7%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .logoWrapper {
+    display: flex;
+    justify-content: space-between;
+    color: white;
+    padding: 10px;
+    align-items: center;
+  }
+
+  nav {
+    display: flex;
+  }
+
+  header {
+    display: flex;
+    font-weight: 600;
+  }
+  .serviceName {
+    text-decoration: none;
+  }
+  .userNavbar {
+    display: flex;
+  }
+
+  .mainMenu {
+    padding: 10px;
+    text-decoration: none;
+    color: white;
+  }
+  .userMenu {
+    padding: 10px;
+    text-decoration: none;
+    color: white;
+  }
+}
+
+.logoWrapper svg {
+  display: none;
+}
+
+@media screen and (max-width: 700px) {
+  .userNavbar {
+    flex-direction: column;
+    justify-content: center;
+  }
+  .headerWrapper {
+    display: block;
+    height: auto;
+  }
+  nav {
+    justify-content: center;
+  }
+  header {
+    justify-content: center;
+  }
+
+  .logoWrapper svg {
+    display: block;
+  }
 }

@@ -60,7 +60,6 @@ router.post("/list", (req, res) => {
     .limit(9) // 그 중 5개만.
     .exec()
     .then((doc) => {
-      console.log(doc, "요기요기요기요ㅣ욕이ㅛ이");
       res.status(200).json({ success: true, postList: doc });
     })
     .catch((err) => {
@@ -125,6 +124,8 @@ router.post("/bookmark/post", (req, res) => {
     .exec()
     .then((userInfo) => {
       Post.find({ _id: { $in: userInfo.bookmark } })
+        .skip((req.body.page - 1) * 9) // n개 건너뛰기.
+        .limit(9) // 그 중 5개만.
         .exec()
         .then((docs) => {
           res.status(200).json({ success: true, bookmarkPost: docs });
