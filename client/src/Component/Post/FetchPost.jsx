@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
-import { PostDiv, BtnDiv, PostWrapperDiv } from "../../Style/DetailCSS.js";
-import Spinner from "react-bootstrap/Spinner";
+import Loading from "./Loading/Loading";
+
 import Detail from "./Detail";
 import CommentWrapper from "../Comment/CommentWrapper/CommentWrapper";
 import axios from "axios";
@@ -31,16 +31,14 @@ const FetchPost = () => {
     fetchPost();
   }, []);
   return (
-    <div>
+    <div style={{ height: "93%" }}>
       {flag ? (
         <>
           <Detail post={post} />
           <CommentWrapper postId={post._id} />
         </>
       ) : (
-        <Spinner animation="border" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </Spinner>
+        <Loading />
       )}
     </div>
   );

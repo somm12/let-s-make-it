@@ -1,5 +1,5 @@
 import React from "react";
-import { Form } from "react-bootstrap";
+
 import axios from "axios";
 const ImageUpload = ({ setImage }) => {
   const fileUpload = (e) => {
@@ -13,7 +13,7 @@ const ImageUpload = ({ setImage }) => {
   };
   return (
     <div>
-      <Form.Control
+      <input
         onChange={fileUpload}
         type="file"
         accept="image/*"

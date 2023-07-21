@@ -15,6 +15,7 @@ const Upload = ({ list, setList }) => {
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
   const [image, setImage] = useState("");
+  const [ingredients, setIngredients] = useState("");
 
   useEffect(() => {
     if (!user.accessToken) {
@@ -26,6 +27,7 @@ const Upload = ({ list, setList }) => {
     const {
       target: { value },
     } = e;
+    value = value.replaceAll("<br>", "\n");
     setContent(value);
   };
   const onChangeText = (e) => {
@@ -34,13 +36,28 @@ const Upload = ({ list, setList }) => {
     } = e;
     setTitle(value);
   };
+
+  const onChangeIngredients = (e) => {
+    const {
+      target: { value },
+    } = e;
+
+    setIngredients(value);
+  };
   const onSubmitPost = async (e) => {
     e.preventDefault();
-    if (content === "" || title === "") {
+    if (content === "" || title === "" || ingredients === "") {
       alert("제목 내용 모두 입력해주세요");
       return;
     }
-    const body = { title, content, image, uid: user.uid };
+
+    const body = {
+      title,
+      content: content.replaceAll("<br>", "\r\n"),
+      image,
+      uid: user.uid,
+      ingredients: ingredients.replaceAll("<br>", "\r\n"),
+    };
 
     try {
       const { data } = await axios.post("/api/post/submit", body);
@@ -62,8 +79,21 @@ const Upload = ({ list, setList }) => {
         <input id="title" value={title} onChange={onChangeText} />
         <ImageUpload setImage={setImage} />
         {image && <img src={image} alt="" />}
+
+        <label htmlFor="ingredients">재료</label>
+        <textarea
+          className="ingredientsTextarea"
+          id="ingredients"
+          value={ingredients}
+          onChange={onChangeIngredients}
+        />
         <label htmlFor="content">내용</label>
-        <textarea id="content" value={content} onChange={onChangeContent} />
+        <textarea
+          className="wayToCook"
+          id="content"
+          value={content}
+          onChange={onChangeContent}
+        />
         <UploadButtonDiv>
           <button onClick={onSubmitPost}>제출</button>
         </UploadButtonDiv>

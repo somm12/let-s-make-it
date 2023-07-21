@@ -36,6 +36,7 @@ const CommentUpload = ({ postId }) => {
 
   return (
     <div className={style.uploadWrapper}>
+      <div className={style.commentHeader}>댓글 쓰기</div>
       <input
         type="text"
         placeholder="댓글을 입력해주세요"

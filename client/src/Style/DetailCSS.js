@@ -8,13 +8,21 @@ const PostWrapperDiv = styled.div`
   padding: 0 1rem;
 `;
 const PostDiv = styled.div`
+  width: 40%;
   .title {
     font-size: 1.5rem;
+    width: 100%;
+  }
+  h5 {
+    font-weight: bold;
   }
   border: 1px solid gray;
   border-radius: 0.5rem;
-  padding: 0.5rem;
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+
   img {
     width: 100%;
     height: auto;
@@ -28,6 +36,29 @@ const PostDiv = styled.div`
     background-color: white;
     border: 0;
   }
+
+  .userInfo {
+    display: flex;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  .thumbNailImgWrapper {
+    display: flex;
+  }
+  .content {
+    width: 100%;
+    margin-top: 30px;
+    .ingredients {
+      margin-bottom: 20px;
+    }
+  }
+  .ingredients,
+  .wayToCook {
+    white-space: pre-line;
+  }
+  @media screen and (max-width: 700px) {
+    width: 100%;
+  }
 `;
 const BtnDiv = styled.div`
   margin-top: 1rem;
@@ -35,21 +66,20 @@ const BtnDiv = styled.div`
   justify-content: flex-end;
   width: 100%;
   .editBtn {
-    border-radius: 2rem;
+    border-radius: 1rem;
     margin-right: 0.5rem;
-    border: 1px solid gray;
+    border: 2px solid #2196f3;
     padding: 0.5rem;
     background-color: white;
     &:hover {
-      background-color: black;
-      color: white;
+      color: #2196f3;
     }
   }
   .deleteBtn {
-    border-radius: 2rem;
+    border-radius: 1rem;
     padding: 0.5rem;
-    border: none;
-    background-color: red;
+    border: 2px solid red;
+    background-color: #ffffff;
     &:hover {
       background-color: white;
       color: red;

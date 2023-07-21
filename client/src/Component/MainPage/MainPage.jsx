@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import List from "../Post/PostList/PostList";
 import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import FindContainerDiv from "../../Style/MainPageCSS.js";
-import Dropdown from "react-bootstrap/Dropdown";
 
-import DropdownButton from "react-bootstrap/DropdownButton";
 import style from "./MainPage.module.scss";
 
 const MainPage = () => {
@@ -12,6 +12,7 @@ const MainPage = () => {
   const [sort, setSort] = useState("최신순");
   const [searchTerm, setSearchTerm] = useState("");
   const [page, setPage] = useState(1);
+  const [isSortBtnOpen, setIsSortBtnOpen] = useState(false);
 
   const preventRef = useRef(true); //중복 실행 방지
   const obsRef = useRef(null); //observer Element
@@ -87,6 +88,38 @@ const MainPage = () => {
           type="text"
         />
 
+        <div className={style.DropdownButton}>
+          <button
+            className={style.textButton}
+            onClick={() => setIsSortBtnOpen(!isSortBtnOpen)}
+          >
+            {sort}
+            <FontAwesomeIcon icon={faCaretDown} />
+          </button>
+          <div
+            className={isSortBtnOpen ? style.DropdownTrue : style.DropdownFalse}
+          >
+            <button
+              onClick={() => {
+                setSort("최신순");
+                setPage(1);
+                setIsSortBtnOpen(!isSortBtnOpen);
+              }}
+            >
+              최신순
+            </button>
+            <button
+              onClick={() => {
+                setSort("인기순");
+                setPage(1);
+                setIsSortBtnOpen(!isSortBtnOpen);
+              }}
+            >
+              인기순
+            </button>
+          </div>
+        </div>
+        {/* 
         <DropdownButton title={sort}>
           <Dropdown.Item
             onClick={() => {
@@ -104,7 +137,7 @@ const MainPage = () => {
           >
             인기순
           </Dropdown.Item>
-        </DropdownButton>
+        </DropdownButton> */}
       </FindContainerDiv>
 
       <List postList={postList} />

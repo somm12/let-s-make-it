@@ -1,0 +1,13 @@
+.imageEditWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
+
+  img {
+    margin-top: 10px;
+  }
+  input {
+    width: 100%;
+  }
+}

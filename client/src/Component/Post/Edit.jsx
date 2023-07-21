@@ -5,7 +5,7 @@ import {
   UploadDiv,
 } from "../../Style/UploadCSS.js";
 import { useParams, useNavigate } from "react-router-dom";
-import ImageEdit from "./ImageEdit";
+import ImageEdit from "./ImageEdit/ImageEdit";
 import axios from "axios";
 const Edit = () => {
   let params = useParams();
@@ -14,6 +14,8 @@ const Edit = () => {
   const [title, setTitle] = useState("");
   const [post, setPost] = useState([]);
   const [image, setImage] = useState("");
+  const [ingredients, setIngredients] = useState("");
+
   const onChangeContent = (e) => {
     const {
       target: { value },
@@ -26,14 +28,22 @@ const Edit = () => {
     } = e;
     setTitle(value);
   };
+
+  const onChangeIngredients = (e) => {
+    const {
+      target: { value },
+    } = e;
+    setIngredients(value);
+  };
+
   const onSubmitPost = async (e) => {
     e.preventDefault();
-    if (content === "" || title === "") {
-      alert("제목 내용 모두 입력해주세요");
+    if (content === "" || title === "" || ingredients === "") {
+      alert("제목 내용 재료 모두 입력해주세요");
       return;
     }
 
-    const body = { title, content, postNum: post.postNum, image };
+    const body = { title, content, postNum: post.postNum, image, ingredients };
 
     try {
       const { data } = await axios.post("/api/post/edit", body);
@@ -60,6 +70,7 @@ const Edit = () => {
         setContent(data.post.content);
         setTitle(data.post.title);
         setImage(data.post.image);
+        setIngredients(data.post.ingredients);
       }
     } catch (e) {
       console.log(e);
@@ -81,8 +92,17 @@ const Edit = () => {
         <label htmlFor="label">제목</label>
         <input id="title" value={title} onChange={onChangeText} />
         <ImageEdit image={image} setImage={setImage} />
+
+        <label htmlFor="ingredients">재료</label>
+        <textarea
+          className="ingredientsTextarea"
+          id="ingredients"
+          value={ingredients}
+          onChange={onChangeIngredients}
+        />
         <label htmlFor="content">내용</label>
         <textarea id="content" value={content} onChange={onChangeContent} />
+
         <UploadButtonDiv>
           <button className="cancel" onClick={onCancel}>
             취소

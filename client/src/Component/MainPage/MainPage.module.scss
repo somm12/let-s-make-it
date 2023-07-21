@@ -1,3 +1,31 @@
 .observer {
   height: 30px;
 }
+
+.DropdownButton {
+  position: relative;
+  button {
+    border: 0;
+    border-radius: 5px;
+    padding: 6px;
+    margin-bottom: 2px;
+  }
+  .selection {
+    width: 100%;
+  }
+
+  svg {
+    color: gray;
+    margin-left: 5px;
+  }
+}
+.DropdownTrue {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  width: 100%;
+}
+
+.DropdownFalse {
+  display: none;
+}

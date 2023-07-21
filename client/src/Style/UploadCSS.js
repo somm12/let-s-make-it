@@ -26,10 +26,11 @@ const UploadButtonDiv = styled.div`
 `;
 
 const UploadForm = styled.form`
-  width: 80%;
+  width: 70%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
+  font-weight: bold;
   #title {
     border-radius: 0.5rem;
     margin-bottom: 0.5rem;
@@ -51,10 +52,13 @@ const UploadForm = styled.form`
     }
     padding-left: 0.5rem;
   }
+  .ingredientsTextarea {
+    min-height: 100px;
+  }
 
   img {
-    width: 100px;
-    height: 100px;
+    width: 200px;
+    height: 200px;
     border-radius: 0;
   }
 `;

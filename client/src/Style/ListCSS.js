@@ -6,20 +6,18 @@ const ListDiv = styled.div`
   color: grey;
   margin: 30px;
   border: 1px solid black;
-  border-radius: 20px;
-  padding: 10px;
+  border-radius: 22px;
+  height: 300px;
   a {
     text-decoration: none;
     color: black;
   }
 
   img {
-    width: 200px;
     height: 200px;
-    border-radius: 20px;
+    border-radius: 20px 20px 0px 0px;
   }
 
-  box-shadow: 1px 2px gray;
   .userProfile {
     width: 30px;
     border-radius: 30%;

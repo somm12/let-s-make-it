@@ -11,8 +11,9 @@ router.post("/submit", (req, res) => {
     title: req.body.title,
     content: req.body.content,
     image: req.body.image,
+    ingredients: req.body.ingredients,
   };
-  console.log(temp);
+
   Counter.findOne({ name: "counter" })
     .exec()
     .then((counter) => {
@@ -91,6 +92,7 @@ router.post("/edit", (req, res) => {
     title: req.body.title,
     content: req.body.content,
     image: req.body.image,
+    ingredients: req.body.ingredients,
   };
   Post.updateOne({ postNum: Number(req.body.postNum) }, { $set: temp })
     .exec()

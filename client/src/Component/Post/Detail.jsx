@@ -15,9 +15,7 @@ const Detail = ({ post }) => {
   const [isBookmark, setIsBookmark] = useState(
     user.bookmark.some((postId) => postId === post._id)
   );
-  console.log(user, "!!!!!!");
 
-  console.log(isBookmark, "유저 정보!");
   let navigate = useNavigate();
   let params = useParams();
   const deleteHandler = async () => {
@@ -95,17 +93,28 @@ const Detail = ({ post }) => {
             </button>
           </div>
         </div>
-        <div className="userInfo" style={{ display: "flex" }}>
+        <div className="userInfo">
           <div style={{ width: "25px", marginRight: "5px" }}>
             <img style={{ borderRadius: "50%" }} src={post.author.photoURL} />
           </div>
-          <div className="author">작성자: {post.author.displayName}</div>
+          <div className="author">{post.author.displayName}</div>
         </div>
 
         {post.image && (
-          <img style={{ width: "500px" }} src={post.image} alt="" />
+          <div className="thumbNailImgWrapper">
+            <img src={post.image} alt="" />
+          </div>
         )}
-        <div className="content">{post.content}</div>
+        <div className="content">
+          <div className="ingredients">
+            <h5>재료</h5>
+            <div>{post.ingredients}</div>
+          </div>
+          <div className="wayToCook">
+            <h5>방법</h5>
+            <div>{post.content}</div>
+          </div>
+        </div>
       </PostDiv>
       {post.author.uid === user.uid && (
         <BtnDiv>

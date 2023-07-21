@@ -1,5 +1,5 @@
 import React from "react";
-import { Form } from "react-bootstrap";
+import style from "./ImageEdit.module.scss";
 import axios from "axios";
 const ImageEdit = ({ image, setImage }) => {
   const fileUpload = (e) => {
@@ -13,8 +13,8 @@ const ImageEdit = ({ image, setImage }) => {
     // 서버로 파일 정보 보내기, 이미지 경로를 client로 전송, post model에 이미지 경로 저장.
   };
   return (
-    <div>
-      <Form.Control
+    <div className={style.imageEditWrapper}>
+      <input
         onChange={fileUpload}
         type="file"
         accept="image/*"
