@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Loading from "./Loading/Loading";
 
-import Detail from "./Detail";
+import Detail from "./Detail/Detail";
 import CommentWrapper from "../Comment/CommentWrapper/CommentWrapper";
 import axios from "axios";
 const FetchPost = () => {

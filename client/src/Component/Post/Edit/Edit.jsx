@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from "react";
-import {
-  UploadButtonDiv,
-  UploadForm,
-  UploadDiv,
-} from "../../Style/UploadCSS.js";
 import { useParams, useNavigate } from "react-router-dom";
-import ImageEdit from "./ImageEdit/ImageEdit";
+import ImageEdit from "../ImageEdit/ImageEdit";
+
+import style from "./Edit.module.scss";
 import axios from "axios";
 const Edit = () => {
   let params = useParams();
@@ -87,15 +84,15 @@ const Edit = () => {
   };
 
   return (
-    <UploadDiv>
-      <UploadForm>
+    <div className={style.uploadWrapper}>
+      <form className={style.uploadForm}>
         <label htmlFor="label">제목</label>
         <input id="title" value={title} onChange={onChangeText} />
         <ImageEdit image={image} setImage={setImage} />
 
         <label htmlFor="ingredients">재료</label>
         <textarea
-          className="ingredientsTextarea"
+          className={style.ingredientsTextarea}
           id="ingredients"
           value={ingredients}
           onChange={onChangeIngredients}
@@ -103,14 +100,14 @@ const Edit = () => {
         <label htmlFor="content">내용</label>
         <textarea id="content" value={content} onChange={onChangeContent} />
 
-        <UploadButtonDiv>
-          <button className="cancel" onClick={onCancel}>
+        <div className={style.uploadButton}>
+          <button className={style.cancel} onClick={onCancel}>
             취소
           </button>
           <button onClick={onSubmitPost}>제출</button>
-        </UploadButtonDiv>
-      </UploadForm>
-    </UploadDiv>
+        </div>
+      </form>
+    </div>
   );
 };
 

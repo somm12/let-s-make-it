@@ -1,13 +1,12 @@
-import styled from "@emotion/styled";
-
-const PostWrapperDiv = styled.div`
+.postWrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 1rem;
-  padding: 0 1rem;
-`;
-const PostDiv = styled.div`
+  margin-top: 16px;
+  padding: 0 16px;
+}
+
+.postContainer {
   width: 40%;
   .title {
     font-size: 1.5rem;
@@ -59,8 +58,9 @@ const PostDiv = styled.div`
   @media screen and (max-width: 700px) {
     width: 100%;
   }
-`;
-const BtnDiv = styled.div`
+}
+
+.buttonBox {
   margin-top: 1rem;
   display: flex;
   justify-content: flex-end;
@@ -85,5 +85,4 @@ const BtnDiv = styled.div`
       color: red;
     }
   }
-`;
-export { PostDiv, BtnDiv, PostWrapperDiv };
+}

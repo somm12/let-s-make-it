@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import LoginDiv from "../../Style/UserCSS.js";
-import firebase from "../../firebase.js";
+
+import firebase from "../../../firebase.js";
 import { useSelector, useDispatch } from "react-redux";
-import { loginUser, clearUser } from "../../Reducer/userSlice";
+import { loginUser, clearUser } from "../../../Reducer/userSlice";
+import style from "./Login.module.scss";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -61,7 +62,7 @@ const Login = () => {
     }, 5000);
   }, [errorMsg]);
   return (
-    <LoginDiv>
+    <div className={style.loginWrapper}>
       <form>
         <label>이메일</label>
         <input
@@ -88,7 +89,7 @@ const Login = () => {
           회원가입
         </button>
       </form>
-    </LoginDiv>
+    </div>
   );
 };
 

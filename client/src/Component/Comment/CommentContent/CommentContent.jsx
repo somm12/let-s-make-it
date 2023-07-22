@@ -1,6 +1,6 @@
-import React, { useState, useRef, useEffect, useCallback } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { useEditComment, useDeleteComment } from "../commentAPI";
+import { useEditComment, useDeleteComment } from "../../../Hooks/commentAPI";
 import style from "./CommentContent.module.scss";
 import moment from "moment";
 import "moment/locale/ko";

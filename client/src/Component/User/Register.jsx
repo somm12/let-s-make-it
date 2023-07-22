@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import firebase from "../../firebase.js";
-import LoginDiv from "../../Style/UserCSS.js";
+
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+
+import style from "./Login/Login.module.scss";
 const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -77,7 +79,7 @@ const Register = () => {
     }
   };
   return (
-    <LoginDiv>
+    <div className={style.loginWrapper}>
       <form>
         <label>닉네임</label>
         <input
@@ -112,7 +114,7 @@ const Register = () => {
           회원가입
         </button>
       </form>
-    </LoginDiv>
+    </div>
   );
 };
 

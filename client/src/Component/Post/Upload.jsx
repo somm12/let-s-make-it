@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import {
-  UploadButtonDiv,
-  UploadForm,
-  UploadDiv,
-} from "../../Style/UploadCSS.js";
 
 import ImageUpload from "./ImageUpload";
 import { useNavigate } from "react-router-dom";
+import style from "../Post/Edit/Edit.module.scss";
 import axios from "axios";
-const Upload = ({ list, setList }) => {
+const Upload = () => {
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
   const [content, setContent] = useState("");
@@ -73,8 +69,8 @@ const Upload = ({ list, setList }) => {
   };
 
   return (
-    <UploadDiv>
-      <UploadForm>
+    <div className={style.uploadWrapper}>
+      <form className={style.uploadForm}>
         <label htmlFor="label">제목</label>
         <input id="title" value={title} onChange={onChangeText} />
         <ImageUpload setImage={setImage} />
@@ -82,23 +78,23 @@ const Upload = ({ list, setList }) => {
 
         <label htmlFor="ingredients">재료</label>
         <textarea
-          className="ingredientsTextarea"
+          className={style.ingredientsTextarea}
           id="ingredients"
           value={ingredients}
           onChange={onChangeIngredients}
         />
         <label htmlFor="content">내용</label>
         <textarea
-          className="wayToCook"
+          className={style.wayToCook}
           id="content"
           value={content}
           onChange={onChangeContent}
         />
-        <UploadButtonDiv>
+        <div className={style.uploadButton}>
           <button onClick={onSubmitPost}>제출</button>
-        </UploadButtonDiv>
-      </UploadForm>
-    </UploadDiv>
+        </div>
+      </form>
+    </div>
   );
 };
 

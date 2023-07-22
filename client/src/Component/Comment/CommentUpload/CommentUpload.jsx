@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useSubmitComment } from "../commentAPI";
+import { useSubmitComment } from "../../../Hooks/commentAPI";
 import { useSelector } from "react-redux";
 
 import style from "./CommentUpload.module.scss";

@@ -5,9 +5,9 @@ import { faBookmark as bookmarkSolid } from "@fortawesome/free-solid-svg-icons";
 import { faBookmark as bookmarkRegular } from "@fortawesome/free-regular-svg-icons";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useNavigate, Link } from "react-router-dom";
-import { addBookmark, deleteBookmark } from "../../Reducer/userSlice";
+import { addBookmark, deleteBookmark } from "../../../Reducer/userSlice";
+import style from "./Detail.module.scss";
 
-import { PostDiv, BtnDiv, PostWrapperDiv } from "../../Style/DetailCSS.js";
 const Detail = ({ post }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
@@ -79,12 +79,12 @@ const Detail = ({ post }) => {
     }
   };
   return (
-    <PostWrapperDiv>
-      <PostDiv>
-        <div className="title">
-          <div className="titleHeadline">
+    <div className={style.postWrapper}>
+      <div className={style.postContainer}>
+        <div className={style.title}>
+          <div className={style.titleHeadline}>
             <h5>{post.title}</h5>
-            <button className="bookmarkBtn" onClick={bookmarkHandler}>
+            <button className={style.bookmarkBtn} onClick={bookmarkHandler}>
               {isBookmark ? (
                 <FontAwesomeIcon icon={bookmarkSolid} />
               ) : (
@@ -93,40 +93,40 @@ const Detail = ({ post }) => {
             </button>
           </div>
         </div>
-        <div className="userInfo">
+        <div className={style.userInfo}>
           <div style={{ width: "25px", marginRight: "5px" }}>
             <img style={{ borderRadius: "50%" }} src={post.author.photoURL} />
           </div>
-          <div className="author">{post.author.displayName}</div>
+          <div className={style.author}>{post.author.displayName}</div>
         </div>
 
         {post.image && (
-          <div className="thumbNailImgWrapper">
+          <div className={style.thumbNailImgWrapper}>
             <img src={post.image} alt="" />
           </div>
         )}
-        <div className="content">
-          <div className="ingredients">
+        <div className={style.content}>
+          <div className={style.ingredients}>
             <h5>재료</h5>
             <div>{post.ingredients}</div>
           </div>
-          <div className="wayToCook">
+          <div className={style.wayToCook}>
             <h5>방법</h5>
             <div>{post.content}</div>
           </div>
         </div>
-      </PostDiv>
+      </div>
       {post.author.uid === user.uid && (
-        <BtnDiv>
+        <div className={style.buttonBox}>
           <Link to={`/edit/${post.postNum}`}>
-            <button className="editBtn">수정</button>
+            <button className={style.editBtn}>수정</button>
           </Link>
-          <button className="deleteBtn" onClick={deleteHandler}>
+          <button className={style.deleteBtn} onClick={deleteHandler}>
             삭제
           </button>
-        </BtnDiv>
+        </div>
       )}
-    </PostWrapperDiv>
+    </div>
   );
 };
 

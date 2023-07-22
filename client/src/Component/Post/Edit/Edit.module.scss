@@ -1,0 +1,67 @@
+.uploadWrapper {
+  width: 100%;
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+.uploadForm {
+  width: 70%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+  #title {
+    border-radius: 0.5rem;
+    margin-bottom: 0.5rem;
+    border: 1px solid gray;
+    &:focus,
+    &:active {
+      outline: none;
+    }
+    padding-left: 0.5rem;
+  }
+  textarea {
+    min-height: 25rem;
+    resize: none;
+    border-radius: 0.5rem;
+    border: 1px solid gray;
+    &:focus,
+    &:active {
+      outline: none;
+    }
+    padding-left: 0.5rem;
+  }
+  .ingredientsTextarea {
+    min-height: 100px;
+  }
+
+  img {
+    width: 200px;
+    height: 200px;
+    border-radius: 0;
+  }
+  .uploadButton {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px 0px;
+    button {
+      border-radius: 0.5rem;
+      border: 1px solid black;
+      background-color: black;
+      color: white;
+      &:hover {
+        color: black;
+        background-color: white;
+      }
+    }
+    .cancel {
+      margin-right: 0.5rem;
+      color: black;
+      background-color: white;
+      &:hover {
+        background-color: black;
+        color: white;
+      }
+    }
+  }
+}

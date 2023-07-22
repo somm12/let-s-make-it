@@ -3,7 +3,6 @@ import List from "../Post/PostList/PostList";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
-import FindContainerDiv from "../../Style/MainPageCSS.js";
 
 import style from "./MainPage.module.scss";
 
@@ -79,7 +78,7 @@ const MainPage = () => {
 
   return (
     <div>
-      <FindContainerDiv>
+      <div className={style.finderContainer}>
         <input
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
@@ -119,26 +118,7 @@ const MainPage = () => {
             </button>
           </div>
         </div>
-        {/* 
-        <DropdownButton title={sort}>
-          <Dropdown.Item
-            onClick={() => {
-              setSort("최신순");
-              setPage(1);
-            }}
-          >
-            최신순
-          </Dropdown.Item>
-          <Dropdown.Item
-            onClick={() => {
-              setSort("인기순");
-              setPage(1);
-            }}
-          >
-            인기순
-          </Dropdown.Item>
-        </DropdownButton> */}
-      </FindContainerDiv>
+      </div>
 
       <List postList={postList} />
       {/* {loadMore && <button onClick={getPostLoadMore}>더 불러오기</button>} */}

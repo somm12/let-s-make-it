@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useGetComments } from "./commentAPI";
+import { useGetComments } from "../../Hooks/commentAPI";
 import CommentContent from "./CommentContent/CommentContent";
 
 const List = ({ postId }) => {

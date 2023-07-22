@@ -1,4 +1,13 @@
+.finderContainer {
+  display: flex;
+  justify-content: center;
+  input {
+    margin-right: 30px;
+  }
+}
+
 .observer {
+  // infinte scroll observer.
   height: 30px;
 }
 
