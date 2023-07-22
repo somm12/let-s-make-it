@@ -36,14 +36,17 @@ const MyPage = () => {
     });
   }, []);
 
-  const profileChange = (e) => {
+  const profileChange = async (e) => {
     const formData = new FormData();
     formData.append("file", e.target.files[0]);
-    axios.post("/api/user/profile/edit", formData).then((response) => {
-      console.log(response.data);
-      setProfile(response.data.filePath);
-    });
-    setIsChange(true);
+
+    try {
+      const { data } = await axios.post("/api/user/profile/edit", formData);
+      setProfile(data.filePath);
+      setIsChange(true);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   const displayNameChange = (e) => {

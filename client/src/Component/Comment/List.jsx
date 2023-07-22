@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useGetComments } from "./commentAPI";
 import CommentContent from "./CommentContent/CommentContent";
@@ -13,24 +12,6 @@ const List = ({ postId }) => {
       setCommentList(data?.data?.commentList);
     }
   }, [isFetching]);
-
-  // const fetchComments = async () => {
-  //   let body = {
-  //     postId,
-  //   };
-  //   try {
-  //     const data = await axios.post("/api/comment/list", body);
-  //     if (data.data.success) {
-  //       console.log(data.data);
-  //       setCommentList([...data.data.commentList]);
-  //     }
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // };
-  // useEffect(() => {
-  //   fetchComments();
-  // }, []);
 
   return (
     <div>

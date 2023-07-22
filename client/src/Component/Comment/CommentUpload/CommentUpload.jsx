@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSubmitComment } from "../commentAPI";
 import { useSelector } from "react-redux";
-import axios from "axios";
-import { useNavigate } from "react-router";
+
 import style from "./CommentUpload.module.scss";
 
 const CommentUpload = ({ postId }) => {
