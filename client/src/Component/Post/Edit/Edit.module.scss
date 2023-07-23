@@ -11,25 +11,25 @@
   flex-direction: column;
   font-weight: bold;
   #title {
-    border-radius: 0.5rem;
-    margin-bottom: 0.5rem;
+    border-radius: 8px;
+    margin-bottom: 8px;
     border: 1px solid gray;
     &:focus,
     &:active {
       outline: none;
     }
-    padding-left: 0.5rem;
+    padding-left: 8px;
   }
   textarea {
-    min-height: 25rem;
+    min-height: 400px;
     resize: none;
-    border-radius: 0.5rem;
+    border-radius: 8px;
     border: 1px solid gray;
     &:focus,
     &:active {
       outline: none;
     }
-    padding-left: 0.5rem;
+    padding-left: 8px;
   }
   .ingredientsTextarea {
     min-height: 100px;
@@ -45,7 +45,7 @@
     justify-content: flex-end;
     padding: 10px 0px;
     button {
-      border-radius: 0.5rem;
+      border-radius: 8px;
       border: 1px solid black;
       background-color: black;
       color: white;
@@ -55,7 +55,7 @@
       }
     }
     .cancel {
-      margin-right: 0.5rem;
+      margin-right: 8px;
       color: black;
       background-color: white;
       &:hover {

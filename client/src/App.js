@@ -4,7 +4,7 @@ import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import Heading from "./Component/Header/Header";
 import Upload from "./Component/Post/Upload";
-import FetchPost from "./Component/Post/FetchPost";
+import PostWrapper from "./Component/Post/PostWrapper/PostWrapper";
 import Edit from "./Component/Post/Edit/Edit";
 import Login from "./Component/User/Login/Login";
 import Register from "./Component/User/Register";
@@ -63,7 +63,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<MainPage />}></Route>
         <Route path="/upload" element={<Upload />}></Route>
-        <Route path="/post/:postNum" element={<FetchPost />}></Route>
+        <Route path="/post/:postNum" element={<PostWrapper />}></Route>
         <Route path="/edit/:postNum" element={<Edit />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/register" element={<Register />}></Route>

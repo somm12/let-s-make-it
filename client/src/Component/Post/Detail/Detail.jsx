@@ -94,8 +94,8 @@ const Detail = ({ post }) => {
           </div>
         </div>
         <div className={style.userInfo}>
-          <div style={{ width: "25px", marginRight: "5px" }}>
-            <img style={{ borderRadius: "50%" }} src={post.author.photoURL} />
+          <div className={style.userProfile}>
+            <img src={post.author.photoURL} />
           </div>
           <div className={style.author}>{post.author.displayName}</div>
         </div>

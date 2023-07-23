@@ -12,4 +12,21 @@ table {
     width: 100px;
     height: 100px;
   }
+  .photoChange input {
+    display: none;
+  }
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    cursor: pointer;
+  }
+
+  .profileImageLabel {
+    display: flex;
+    width: 180px;
+    height: 180px;
+    border-radius: 70%;
+    overflow: hidden;
+  }
 }

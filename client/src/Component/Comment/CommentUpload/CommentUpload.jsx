@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useSubmitComment } from "../../../Hooks/commentAPI";
+import { useSubmitComment } from "../../../Hooks/commentQueryAPI";
 import { useSelector } from "react-redux";
 
 import style from "./CommentUpload.module.scss";
@@ -8,29 +8,26 @@ const CommentUpload = ({ postId }) => {
   const user = useSelector((state) => state.user);
   const [comment, setComment] = useState("");
 
-  const { mutateAsync: submitAsync } = useSubmitComment(
-    postId,
-    user.uid,
-    comment
-  );
+  const { mutate: submitMutate } = useSubmitComment(postId, user.uid, comment);
 
   const submitHandler = async (e) => {
     e.preventDefault();
     if (!comment) {
       alert("댓글을 작성해주세요!");
+      return;
     }
-    try {
-      const {
-        data: { success },
-      } = await submitAsync();
-      console.log(success);
-      if (success) {
-        setComment("");
-        alert("댓글 작성이 완료되었습니다!");
+    submitMutate(
+      {},
+      {
+        onSuccess: () => {
+          setComment("");
+          alert("댓글 작성이 완료되었습니다!");
+        },
+        onError: () => {
+          alert("댓글 작성에 실패했습니다!");
+        },
       }
-    } catch (error) {
-      alert("댓글 작성에 실패했습니다!");
-    }
+    );
   };
 
   return (

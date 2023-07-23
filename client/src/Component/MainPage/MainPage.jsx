@@ -7,6 +7,7 @@ import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import style from "./MainPage.module.scss";
 
 const MainPage = () => {
+  const sortBtnRef = useRef();
   const [postList, setPostList] = useState([]);
   const [sort, setSort] = useState("최신순");
   const [searchTerm, setSearchTerm] = useState("");
@@ -18,9 +19,9 @@ const MainPage = () => {
   const endRef = useRef(false); //모든 글 로드 확인
 
   useEffect(() => {
-    console.log("머야");
     const observer = new IntersectionObserver(obsHandler, { threshold: 0.5 }); // 50% 가 보이면 로드하기.
     if (obsRef.current) observer.observe(obsRef.current);
+
     return () => {
       observer.disconnect();
     };
@@ -76,6 +77,19 @@ const MainPage = () => {
     }
   };
 
+  const modalCloseHandler = ({ target }) => {
+    // 모달이 열려있고, ref 영역이 아닌 영역클릭시, 모달 닫기.
+    if (isSortBtnOpen && !sortBtnRef.current.contains(target))
+      setIsSortBtnOpen(false);
+  };
+  useEffect(() => {
+    document.addEventListener("mousedown", modalCloseHandler);
+
+    // Cleanup the event listener, unmount 될 때, evenListener 제거해주기.
+    return () => {
+      document.removeEventListener("mousedown", modalCloseHandler);
+    };
+  }, [isSortBtnOpen]);
   return (
     <div>
       <div className={style.finderContainer}>
@@ -87,7 +101,7 @@ const MainPage = () => {
           type="text"
         />
 
-        <div className={style.DropdownButton}>
+        <div className={style.dropdownButton} ref={sortBtnRef}>
           <button
             className={style.textButton}
             onClick={() => setIsSortBtnOpen(!isSortBtnOpen)}
@@ -96,7 +110,7 @@ const MainPage = () => {
             <FontAwesomeIcon icon={faCaretDown} />
           </button>
           <div
-            className={isSortBtnOpen ? style.DropdownTrue : style.DropdownFalse}
+            className={isSortBtnOpen ? style.dropdownTrue : style.dropdownFalse}
           >
             <button
               onClick={() => {
@@ -121,7 +135,7 @@ const MainPage = () => {
       </div>
 
       <List postList={postList} />
-      {/* {loadMore && <button onClick={getPostLoadMore}>더 불러오기</button>} */}
+
       <div className={style.observer} ref={obsRef}></div>
     </div>
   );

@@ -17,25 +17,6 @@ const MyPage = () => {
     setDisplayName(user.displayName);
   }, [user]);
 
-  useEffect(() => {
-    firebase.auth().onAuthStateChanged((userInfo) => {
-      // 현재 로그인한 유저의 정보.
-      if (userInfo !== null) {
-        let user = {
-          displayName: userInfo.multiFactor.user.displayName,
-          uid: userInfo.multiFactor.user.uid,
-          accessToken: userInfo.multiFactor.user.accessToken,
-          photoURL: userInfo.multiFactor.user.photoURL,
-        };
-
-        dispatch(loginUser(user));
-      } else {
-        // 현재 유저 정보가 없다면, 로그인 상태가 아니므로, user store를 비운다.
-        dispatch(clearUser());
-      }
-    });
-  }, []);
-
   const profileChange = async (e) => {
     const formData = new FormData();
     formData.append("file", e.target.files[0]);
@@ -86,23 +67,14 @@ const MyPage = () => {
           <tr className={style.photoChange}>
             <th>프로필 변경</th>
             <td>
-              <label>
+              <label className={style.profileImageLabel}>
                 <input
                   onChange={profileChange}
-                  style={{ display: "none" }}
                   type="file"
                   accept="image/*"
                   className="shadow-none"
                 />
-                <img
-                  style={{
-                    width: "200px",
-                    borderRadius: "50%",
-                    cursor: "pointer",
-                  }}
-                  src={profile}
-                  alt=""
-                />
+                <img src={profile} alt="" />
               </label>
             </td>
           </tr>

@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import Loading from "./Loading/Loading";
+import Loading from "../Loading/Loading";
 
-import Detail from "./Detail/Detail";
-import CommentWrapper from "../Comment/CommentWrapper/CommentWrapper";
+import Detail from "../Detail/Detail";
+import CommentWrapper from "../../Comment/CommentWrapper/CommentWrapper";
 import axios from "axios";
-const FetchPost = () => {
+import style from "./PostWrapper.module.scss";
+const PostWrapper = () => {
   let params = useParams();
   let navigate = useNavigate();
   const [post, setPost] = useState([]);
@@ -31,7 +32,7 @@ const FetchPost = () => {
     fetchPost();
   }, []);
   return (
-    <div style={{ height: "93%" }}>
+    <div className={style.postWrapper}>
       {flag ? (
         <>
           <Detail post={post} />
@@ -44,4 +45,4 @@ const FetchPost = () => {
   );
 };
 
-export default FetchPost;
+export default PostWrapper;

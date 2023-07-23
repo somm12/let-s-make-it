@@ -42,7 +42,7 @@ const Upload = () => {
   };
   const onSubmitPost = async (e) => {
     e.preventDefault();
-    if (content === "" || title === "" || ingredients === "") {
+    if (content === "" || title === "" || ingredients === "" || image === "") {
       alert("제목 내용 모두 입력해주세요");
       return;
     }

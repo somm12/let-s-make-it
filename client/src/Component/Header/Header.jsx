@@ -34,7 +34,7 @@ const Heading = () => {
   return (
     <div className={style.headerWrapper}>
       <div className={style.logoWrapper}>
-        <a className={style.serviceName} href="/" style={{ color: "white" }}>
+        <a className={style.serviceName} href="/">
           Let's Make It!
         </a>
 

@@ -8,10 +8,10 @@
 
 .observer {
   // infinte scroll observer.
-  height: 30px;
+  height: 50px;
 }
 
-.DropdownButton {
+.dropdownButton {
   position: relative;
   button {
     border: 0;
@@ -28,13 +28,15 @@
     margin-left: 5px;
   }
 }
-.DropdownTrue {
+.dropdownTrue {
   display: flex;
   flex-direction: column;
   position: absolute;
   width: 100%;
+  background-color: white;
+  border-radius: 5px;
 }
 
-.DropdownFalse {
+.dropdownFalse {
   display: none;
 }

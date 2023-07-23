@@ -1,3 +1,13 @@
+@keyframes slide-fade-in-dropdown-animation {
+  0% {
+    transform: translateY(-100%);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
 .headerWrapper {
   background-color: #dcbb63;
   height: 7%;
@@ -5,6 +15,7 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
+
   .logoWrapper {
     display: flex;
     justify-content: space-between;
@@ -22,6 +33,7 @@
     font-weight: 600;
   }
   .serviceName {
+    color: white;
     text-decoration: none;
     font-weight: bold;
   }
