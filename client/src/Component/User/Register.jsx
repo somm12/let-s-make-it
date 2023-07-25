@@ -37,7 +37,7 @@ const Register = () => {
       photoURL:
         "https://kr.object.ncloudstorage.com/letsmakeit/user/92190016.JPG",
     });
-    console.log(createdUser.user);
+
     let body = {
       email: createdUser.user.multiFactor.user.email,
       displayName: createdUser.user.multiFactor.user.displayName,
@@ -56,6 +56,8 @@ const Register = () => {
       return alert("회원가입이 실패했습니다");
     }
   };
+
+  // 닉네임 중복 검사
   const nameCheckHandler = async (e) => {
     e.preventDefault();
     if (!name) {

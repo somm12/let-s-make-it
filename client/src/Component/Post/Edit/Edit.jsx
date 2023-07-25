@@ -80,7 +80,7 @@ const Edit = () => {
 
   const onCancel = (e) => {
     e.preventDefault();
-    navigate(-1);
+    navigate(-1); //뒤로가기.
   };
 
   return (

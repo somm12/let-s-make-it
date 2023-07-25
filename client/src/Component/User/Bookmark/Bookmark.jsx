@@ -35,7 +35,7 @@ const Bookmark = () => {
       setPage((prev) => prev + 1); //페이지 값 증가
     }
   };
-  console.log(page, "페이지");
+
   const getBookmarkedPosts = useCallback(async () => {
     let body = {
       uid: user.uid,
@@ -53,8 +53,6 @@ const Bookmark = () => {
       console.log(e);
     }
   }, [page]);
-
-  console.log(bookmarkedPosts, "북마크된 포스트");
 
   return (
     <div className={style.bookmarkPost}>

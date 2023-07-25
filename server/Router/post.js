@@ -6,7 +6,6 @@ import setUpload from "../Util/upload.js";
 const router = express.Router();
 
 router.post("/submit", (req, res) => {
-  console.log(req.body);
   let temp = {
     title: req.body.title,
     content: req.body.content,
@@ -40,7 +39,6 @@ router.post("/submit", (req, res) => {
 });
 
 router.post("/list", (req, res) => {
-  console.log(req.body, "출력.");
   let sort = {};
   if (req.body.sort === "최신순") {
     sort.createdAt = -1;
@@ -70,9 +68,6 @@ router.post("/list", (req, res) => {
 });
 
 router.post("/detail", (req, res) => {
-  console.log(req.body);
-  let temp = req.body;
-
   Post.findOne({ postNum: Number(req.body.postNum) })
     .populate("author")
     .exec()
@@ -121,17 +116,17 @@ router.post("/image/upload", setUpload("letsmakeit/post"), (req, res) => {
   res.status(200).json({ success: true, filePath: res.req.file.location });
 });
 
+// 북마크 페이지 접속시, post들을 불러옴
 router.post("/bookmark/post", (req, res) => {
   User.findOne({ uid: req.body.uid })
     .exec()
     .then((userInfo) => {
       Post.find({ _id: { $in: userInfo.bookmark } })
         .skip((req.body.page - 1) * 9) // n개 건너뛰기.
-        .limit(9) // 그 중 5개만.
+        .limit(9) // 그 중 9개.
         .exec()
         .then((docs) => {
           res.status(200).json({ success: true, bookmarkPost: docs });
-          console.log(docs);
         })
         .catch((err) => {
           res.status(400).json({ success: false });
@@ -139,14 +134,12 @@ router.post("/bookmark/post", (req, res) => {
         });
     });
 });
-
+// 현재 로그인된 유저의 bookmark 배열(postId 담고 있음)을 불러옴.
 router.post("/bookmark/postId", (req, res) => {
-  console.log("북마크Id get");
   User.findOne({ uid: req.body.uid })
     .exec()
     .then((userInfo) => {
       res.status(200).json({ success: true, bookmark: userInfo.bookmark });
-      console.log(userInfo, "!!");
     })
     .catch((err) => {
       res.status(400).json({ success: false });

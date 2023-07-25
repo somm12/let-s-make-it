@@ -8,7 +8,7 @@ import axios from "axios";
 import style from "./PostWrapper.module.scss";
 const PostWrapper = () => {
   let params = useParams();
-  let navigate = useNavigate();
+
   const [post, setPost] = useState([]);
   const [flag, setFlag] = useState(false);
 

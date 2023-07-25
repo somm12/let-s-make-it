@@ -5,7 +5,6 @@ import setUpload from "../Util/upload.js";
 const router = express.Router();
 
 router.post("/signUp", (req, res) => {
-  console.log(req.body);
   let temp = req.body;
   Counter.findOne({ name: "counter" })
     .exec()
@@ -27,7 +26,6 @@ router.post("/signUp", (req, res) => {
 });
 
 router.post("/nameCheck", (req, res) => {
-  console.log(req.body.displayName);
   User.findOne({ displayName: req.body.displayName })
     .exec()
     .then((doc) => {
@@ -48,7 +46,6 @@ router.post("/profile/edit", setUpload("letsmakeit/user"), (req, res) => {
 });
 
 router.post("/profile/save", (req, res) => {
-  console.log(req.body, "여기");
   let temp = {
     photoURL: req.body.photoURL,
     displayName: req.body.displayName,
@@ -65,8 +62,6 @@ router.post("/profile/save", (req, res) => {
 });
 
 router.post("/bookmark/add", (req, res) => {
-  console.log(req.body, "북마크 등록 요청 받기");
-
   User.updateOne(
     { uid: req.body.uid },
     { $push: { bookmark: req.body.postId } }
@@ -82,7 +77,6 @@ router.post("/bookmark/add", (req, res) => {
 });
 
 router.post("/bookmark/delete", (req, res) => {
-  console.log(req.body, "북마크 삭제 요청 받기");
   User.updateOne(
     { uid: req.body.uid },
     { $pull: { bookmark: req.body.postId } }

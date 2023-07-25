@@ -8,14 +8,9 @@ import style from "./MyPage.module.scss";
 const MyPage = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-  const [profile, setProfile] = useState("");
-  const [displayName, setDisplayName] = useState("");
+  const [profile, setProfile] = useState(user.photoURL);
+  const [displayName, setDisplayName] = useState(user.displayName);
   const [isChange, setIsChange] = useState(false);
-
-  useEffect(() => {
-    setProfile(user.photoURL);
-    setDisplayName(user.displayName);
-  }, [user]);
 
   const profileChange = async (e) => {
     const formData = new FormData();
@@ -50,6 +45,14 @@ const MyPage = () => {
 
     try {
       const { data } = await axios.post("/api/user/profile/save", body);
+      let temp = {
+        displayName,
+        uid: user.uid,
+        accessToken: user.accessToken,
+        photoURL: profile,
+      };
+
+      dispatch(loginUser(temp));
       if (data.success) {
         alert("프로필이 변경 되었습니다");
         return;
@@ -60,6 +63,25 @@ const MyPage = () => {
     }
   };
 
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged((userInfo) => {
+      // 현재 로그인한 유저의 정보.
+      if (userInfo !== null) {
+        let user = {
+          displayName: userInfo.multiFactor.user.displayName,
+          uid: userInfo.multiFactor.user.uid,
+          accessToken: userInfo.multiFactor.user.accessToken,
+          photoURL: userInfo.multiFactor.user.photoURL,
+        };
+
+        dispatch(loginUser(user));
+      } else {
+        // 현재 유저 정보가 없다면, 로그인 상태가 아니므로, user store를 비운다.
+        dispatch(clearUser());
+      }
+    });
+  }, []);
+
   return (
     <div className={style.myPageWrapper}>
       <table>
@@ -68,12 +90,7 @@ const MyPage = () => {
             <th>프로필 변경</th>
             <td>
               <label className={style.profileImageLabel}>
-                <input
-                  onChange={profileChange}
-                  type="file"
-                  accept="image/*"
-                  className="shadow-none"
-                />
+                <input onChange={profileChange} type="file" accept="image/*" />
                 <img src={profile} alt="" />
               </label>
             </td>

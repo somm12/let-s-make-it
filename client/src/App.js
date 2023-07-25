@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
@@ -13,13 +13,11 @@ import Bookmark from "./Component/User/Bookmark/Bookmark";
 import MainPage from "./Component/MainPage/MainPage";
 
 import firebase from "./firebase.js";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { loginUser, clearUser, setBookmark } from "./Reducer/userSlice";
 import axios from "axios";
 
 const App = () => {
-  const user = useSelector((state) => state.user);
-
   const dispatch = useDispatch();
 
   const getUserBookmark = async (uid) => {
@@ -28,7 +26,7 @@ const App = () => {
     };
     try {
       const { data } = await axios.post("/api/post/bookmark/postId", body);
-      console.log(data.bookmark, "북마크 가져오기.!!!!");
+
       dispatch(setBookmark({ bookmark: data.bookmark })); // id 형태로 넣어줘야함.
     } catch (e) {
       console.log(e);
@@ -37,7 +35,6 @@ const App = () => {
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged((userInfo) => {
-      console.log(userInfo, "유저");
       // 현재 로그인한 유저의 정보.
       if (userInfo !== null) {
         let user = {

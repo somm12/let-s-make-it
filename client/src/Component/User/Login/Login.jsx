@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import firebase from "../../../firebase.js";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { loginUser, clearUser } from "../../../Reducer/userSlice";
 import style from "./Login.module.scss";
 
@@ -14,26 +14,6 @@ const Login = () => {
   const [errorMsg, setErrorMsg] = useState("");
 
   const navigate = useNavigate();
-
-  useEffect(() => {
-    firebase.auth().onAuthStateChanged((userInfo) => {
-      // 현재 로그인한 유저의 정보.
-
-      if (userInfo !== null) {
-        let user = {
-          displayName: userInfo.multiFactor.user.displayName,
-          uid: userInfo.multiFactor.user.uid,
-          accessToken: userInfo.multiFactor.user.accessToken,
-          photoURL: userInfo.multiFactor.user.photoURL,
-        };
-
-        dispatch(loginUser(user));
-      } else {
-        // 현재 유저 정보가 없다면, 로그인 상태가 아니므로, user store를 비운다.
-        dispatch(clearUser());
-      }
-    });
-  }, []);
 
   const signIn = async (e) => {
     e.preventDefault();

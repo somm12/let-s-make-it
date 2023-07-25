@@ -3,7 +3,6 @@ import style from "./ImageEdit.module.scss";
 import axios from "axios";
 const ImageEdit = ({ image, setImage }) => {
   const fileUpload = async (e) => {
-    console.log(image, "AFSAFDSdsafafsd");
     const formData = new FormData();
     formData.append("file", e.target.files[0]);
     try {

@@ -1,5 +1,5 @@
 import React from "react";
-import List from "../List";
+import CommentList from "../CommentList";
 import CommentUpload from "../CommentUpload/CommentUpload";
 import { useSelector } from "react-redux";
 import style from "./CommentWrapper.module.scss";
@@ -9,7 +9,7 @@ const CommentWrapper = ({ postId }) => {
     <div className={style.CommentWrapper}>
       {user.accessToken && <CommentUpload postId={postId} />}
 
-      <List postId={postId} />
+      <CommentList postId={postId} />
     </div>
   );
 };

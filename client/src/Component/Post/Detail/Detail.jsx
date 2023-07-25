@@ -43,7 +43,6 @@ const Detail = ({ post }) => {
     e.preventDefault();
 
     if (!isBookmark) {
-      console.log("?D");
       // 북마크가 안되어 있다면
       try {
         let body = {
@@ -68,7 +67,7 @@ const Detail = ({ post }) => {
           uid: user.uid,
         };
         const { data } = await axios.post("/api/user/bookmark/delete", body);
-        console.log(data);
+
         if (data.success) {
           dispatch(deleteBookmark({ postId: post._id }));
           setIsBookmark(!isBookmark);

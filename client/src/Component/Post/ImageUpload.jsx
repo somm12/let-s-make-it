@@ -17,12 +17,7 @@ const ImageUpload = ({ setImage }) => {
   };
   return (
     <div>
-      <input
-        onChange={fileUpload}
-        type="file"
-        accept="image/*"
-        className="shadow-none"
-      />
+      <input onChange={fileUpload} type="file" accept="image/*" />
     </div>
   );
 };

@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useGetComments } from "../../Hooks/commentQueryAPI";
 import CommentContent from "./CommentContent/CommentContent";
 
-const List = ({ postId }) => {
+const CommentList = ({ postId }) => {
   const [commentList, setCommentList] = useState([]);
-  console.log(postId);
+
   const { data, isFetching } = useGetComments(postId);
 
   useEffect(() => {
@@ -26,4 +26,4 @@ const List = ({ postId }) => {
   );
 };
 
-export default List;
+export default CommentList;

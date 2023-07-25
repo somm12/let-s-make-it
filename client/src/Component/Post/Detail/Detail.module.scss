@@ -40,9 +40,15 @@
     display: flex;
     width: 100%;
     margin-bottom: 10px;
+    align-items: center;
     .userProfile {
       margin-right: 5px;
-      width: 7%;
+
+      width: 30px;
+      height: 30px;
+      border-radius: 70%;
+
+      overflow: hidden;
     }
     img {
       width: 100%;

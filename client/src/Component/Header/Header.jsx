@@ -18,7 +18,6 @@ const Heading = () => {
   };
 
   const handleResize = () => {
-    console.log(window.innerWidth, "크기");
     if (window.innerWidth > 700) {
       setToggleBtn(true);
     }

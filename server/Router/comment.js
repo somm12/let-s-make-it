@@ -5,7 +5,6 @@ import Comment from "../Model/Comment.js";
 const router = express.Router();
 
 router.post("/submit", (req, res) => {
-  console.log(req.body);
   let temp = {
     postId: req.body.postId,
     comment: req.body.comment,
@@ -32,7 +31,6 @@ router.post("/submit", (req, res) => {
 });
 
 router.get("/list/:postId", (req, res) => {
-  console.log(req.params, "받았어요.");
   const { postId } = req.params;
   Comment.find({
     postId,
@@ -41,7 +39,6 @@ router.get("/list/:postId", (req, res) => {
     .populate("author")
     .exec()
     .then((docs) => {
-      console.log(docs);
       return res.status(200).json({ success: true, commentList: docs });
     })
     .catch((err) => {
