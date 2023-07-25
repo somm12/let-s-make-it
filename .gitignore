@@ -8,7 +8,6 @@
 .pnp.js
 # server
 /server/node_modules
-server/index.js
 server/db-key.js
 server/config/dev.js
 /server/package-lock.json
