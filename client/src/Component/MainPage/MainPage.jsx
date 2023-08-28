@@ -42,7 +42,9 @@ const MainPage = () => {
     }
   };
 
+  console.log(page, endRef.current, "페이지");
   const getPostLoadMore = useCallback(async () => {
+    console.log("호출");
     let body = {
       sort,
       searchTerm,
@@ -56,11 +58,12 @@ const MainPage = () => {
 
         preventRef.current = true;
         if (page === 1) {
+          // 검색을 한 경우, 다시 검색 결과 페이지의 첫페이지를 보여야하므로, 초기화.
           setPostList([...data.postList]);
-          endRef.current = false;
+          // endRef.current = false; // 검색 결과가 페이지 개수가 1개 밖에 없다면, endRef가 true가 되고, 그 이후 검색에서도 페이지가 여러 개여도 true가 되어서 (로딩이 안되어) false를 할당.
         } else setPostList((prev) => [...prev, ...data.postList]);
 
-        if (data.postList.length < 9) endRef.current = true;
+        if (data.postList.length < 8) endRef.current = true;
       }
     } catch (e) {
       console.log(e);

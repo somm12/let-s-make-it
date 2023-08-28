@@ -9,6 +9,7 @@ import firebase from "../../firebase";
 import style from "./Header.module.scss";
 
 const Heading = () => {
+  let resizeTimer;
   const user = useSelector((state) => state.user);
   const [toggleBtn, setToggleBtn] = useState(true);
   const navigate = useNavigate();
@@ -17,19 +18,6 @@ const Heading = () => {
     navigate("/");
   };
 
-  const handleResize = () => {
-    if (window.innerWidth > 700) {
-      setToggleBtn(true);
-    }
-  };
-
-  useEffect(() => {
-    window.addEventListener("resize", handleResize);
-    return () => {
-      // cleanup
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
   return (
     <div className={style.headerWrapper}>
       <div className={style.logoWrapper}>
