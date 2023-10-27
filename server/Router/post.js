@@ -55,8 +55,8 @@ router.post("/list", (req, res) => {
   })
     .sort(sort) // 정렬 기준으로 글을 정렬.
     .populate("author") // 타 collection 참조.
-    .skip((req.body.page - 1) * 9) // n개 건너뛰기.
-    .limit(9) // 그 중 5개만.
+    .skip((req.body.page - 1) * 8) // n개 건너뛰기.
+    .limit(8) // 그 중 5개만.
     .exec()
     .then((doc) => {
       res.status(200).json({ success: true, postList: doc });

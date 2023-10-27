@@ -13,7 +13,7 @@ const Detail = ({ post }) => {
   const user = useSelector((state) => state.user);
 
   const [isBookmark, setIsBookmark] = useState(
-    user.bookmark.some((postId) => postId === post._id)
+    new Set(user.bookmark).has(post._id)
   );
 
   let navigate = useNavigate();

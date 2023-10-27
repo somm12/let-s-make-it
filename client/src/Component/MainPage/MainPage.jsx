@@ -14,7 +14,6 @@ const MainPage = () => {
   const [page, setPage] = useState(1);
   const [isSortBtnOpen, setIsSortBtnOpen] = useState(false);
 
-  const preventRef = useRef(true); //중복 실행 방지
   const obsRef = useRef(null); //observer Element
   const endRef = useRef(false); //모든 글 로드 확인
 
@@ -34,17 +33,12 @@ const MainPage = () => {
   const obsHandler = (entries) => {
     const target = entries[0];
 
-    if (!endRef.current && target.isIntersecting && preventRef.current) {
-      //옵저버 중복 실행 방지
-
-      preventRef.current = false; //옵저버 중복 실행 방지
+    if (!endRef.current && target.isIntersecting) {
       setPage((prev) => prev + 1); //페이지 값 증가
     }
   };
 
-  console.log(page, endRef.current, "페이지");
   const getPostLoadMore = useCallback(async () => {
-    console.log("호출");
     let body = {
       sort,
       searchTerm,
@@ -56,7 +50,6 @@ const MainPage = () => {
       if (data.success) {
         // setSkip(skip + data.postList.length);
 
-        preventRef.current = true;
         if (page === 1) {
           // 검색을 한 경우, 다시 검색 결과 페이지의 첫페이지를 보여야하므로, 초기화.
           setPostList([...data.postList]);

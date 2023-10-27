@@ -100,7 +100,7 @@
   <br/>
 <div markdown="1">
 
-<img width="800" alt="image" src="https://github.com/somm12/lets-make-it/assets/63543733/897fabbb-6ea1-45bf-88b9-7de2749f7b5d">
+<img width="800" alt="image" src="https://github.com/somm12/lets-make-it/assets/63543733/47a4771f-8e8a-4def-9dfc-196122c94552">
 
 </div>
 </details>
