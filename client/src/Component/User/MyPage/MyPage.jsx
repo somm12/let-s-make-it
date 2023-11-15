@@ -15,7 +15,6 @@ const MyPage = () => {
   const profileChange = async (e) => {
     const formData = new FormData();
     formData.append("file", e.target.files[0]);
-
     try {
       const { data } = await axios.post("/api/user/profile/edit", formData);
       setProfile(data.filePath);

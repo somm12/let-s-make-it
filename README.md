@@ -20,7 +20,15 @@
 
 <br>
 
-## 4. 주요기능
+## 4. 목차
+
+1. [주요기능](#5-주요기능)
+2. [마주친 문제와 해결과정](#6-마주친-문제와-해결과정)
+3. [UI](#7-ui)
+4. [react query](#8-react-query)
+5. [redux](#9-redux)
+
+## 5 주요기능
 
 1. 게시판
    - 글쓰기 및 파일 업로드 (Naver Cloud Storage)
@@ -32,19 +40,61 @@
    - 댓글 수정
    - 댓글 삭제
    - 댓글 조회
-3. 메인 페이지
+3. 메인 페이지 (무한 스크롤 - IntersectionObserver API)
    - 레시피 검색 기능
-   - 전체 글 최신순, 인기순 정렬 기능 (무한 스크롤)
+   - 전체 글 최신순, 인기순 정렬 기능
 4. 북마크
    - 원하는 게시물 저장
 5. 로그인 및 회원가입 (firebase)
    - 로그인
    - 로그아웃
    - 회원가입
-6. 마이페이지 (user 정보 redux 사용)
+6. 마이페이지 (user 정보 - redux 사용)
    - 프로필 사진, 별명 변경
 
-## 5. UI
+<br>
+
+## 6 마주친 문제와 해결과정
+
+1. 북마크 기능 – non serializable error
+
+- 현재 글이 즐겨찾기가 되었는지 확인을 위해 redux store에 있는 bookmark 배열에서 현재 글의 postId가 있는지 탐색 과정이 필요했습니다. 탐색 시간을 더 줄이기 위해 bookmark 을 Set자료형으로 사용하려고 했고, non-serializable value 에러가 생겼습니다. Set이 직렬화 불가능 타입이었기 때문입니다.
+  <br>
+  ⁉️ 왜 redux에서 직렬화 타입을 사용하도록 권하는 가? <br> <br>
+  ✔️ 직렬화 불가능 타입은 직렬화 및 역직렬화를 거치면 정보가 유실 되는 위험이 있음 <br>
+  <br>
+  ✔️ 당 타입은 변하기 쉬운 데이터이고, 데이터를 update해도 참조 값이 바뀌지 않아서 redux에서 값의 변경을 탐지하지 못하고 재렌더링을 안하는 문제가 생길수도 있음. <br>
+  <br>
+
+✅ 위의 문제로, array 자료형을 쓰기로 결정했고, 프론트에서 array를 set으로 변경 후 has메소드로 즐겨찾기에 추가했던 postId인지 확인하는 로직을 구현했습니다.
+
+---
+
+2. 댓글 기능 – react–query <br>
+   프론트에서 댓글을 쓰고, 수정, 삭제 등 변경한 후, 새로 고침을 통해 화면에 업데이트된 데이터를 불러왔습니다. <br>
+   하지만 새로고침으로 인한 깜빡임 문제 때문에 서버의 데이터 상태가 최신이면 자동으로 API요청을해서 프론트 데이터를 업데이트 할 수 없을까 생각했습니다. 이 부분에서 서버 데이터의 상태를 캐싱하는 라이브러리인 react-query 적용했습니다.
+
+---
+
+3.  무한 스크롤 구현 방식 선택. <br>
+    1️⃣ scroll event 등록 <br> - document에 스크롤 이벤트를 등록하고 특정 지점을 관찰하면서 스크롤이 해당 엘리먼트 위치에 도달하였을 때 콜백 함수를 등록하는 것. <br> - 사용자가 스크롤할 때마다 특정 요소가 화면에 보이는지 안보이는지를 계산 <br> - scroll 이벤트를 처리하는 EventTarget.addEventListener()와 element의 위치를 알아내는 Element.getBoundingClientRect()를 이용 <br>
+    <br>
+    💥 단점<br>
+    ✔️ scroll 이벤트는 스크롤이 될 때마다 일어나기 때문에 event handler에 등록된 함수가 단시간에 무수하게 호출,<br>
+    <br>
+    ✔️ getBoundingClientReact() 함수는 특정 지점 위치 계산하는데, viewport와 element의 상대적인 위치 정보를 반환하기 때문에 스크롤이 될 때마다 새로 계산하고 reflow 현상 발생. <br>
+        - 근본적인 문제: 특정 요소가 보이는지를 판단하는 코드를 위해 main thread(브라우저 자바스크립트 엔진의 single thread)를 낭비. 성능이 나빠질수 있음.
+    <br>
+
+2️⃣ Intersection Observer API <br><br>
+✔️ Intersection Observer API는 특정 엘리먼트가 화면에 들어오는지, 나가는지, 얼마만큼 보이는지, 다시 말해 화면과 특정 엘리먼트가 교차 하는 것을 감지. <br> <br>
+✔️ 브라우저는 교차를 계산하기 위해 main thread를 이용하지 않는다.<br><br>
+✔️ intersection observer api를 사용한 경우에는 target이 감지된 경우에만 Main thread에서 function Call을 호출. 이는 target을 감지하는 intersection observer observe 역할(즉, 감지 또는 화면 위치 계산 부분 같은거) 은 Main thread에 영향을 주지 않는다는 것으로 성능 향상에 도움이된다.<br><br>
+✔️ IntersectionObserverEntry의 속성을 활용하면 getBoundingClientRect()를 호출한 것과 같은 결과를 알 수 있기 때문에 따로 getBoundingClientRect() 함수를 호출할 필요가 없어 리플로우 현상을 방지함.<br> <br>
+
+✅ 스크롤이 발생할 때마다 addEventListener 콜백함수 호출 및 element 위치 계산으로 인한 성능문제가 없는 방향으로 Intersection Observer API 를 선택했습니다<br>
+
+## 7 UI
 
 <details>
 <summary> 1. 메인화면</summary>
@@ -116,7 +166,7 @@
 </details>
 <br/>
 
-## 6.react-query
+## 8 react query
 
 - react-query란?
   - React Application에서 서버의 상태를 불러오고, 캐싱하며 **지속적으로 동기화**하고 업데이트 하는 작업을 도와주는 라이브러리
@@ -138,7 +188,7 @@
   - 캐싱을 효율적으로 관리
   - 여러번 같은 데이터 요청시, 한번만 처리
 
-## 7. redux
+## 9 redux
 
 - redux란
   - 자바스크립트 애플리케이션에서 상태를 효율적으로 관리할 수 있게 도와주는 도구

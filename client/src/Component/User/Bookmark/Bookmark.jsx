@@ -9,7 +9,6 @@ const Bookmark = () => {
 
   // infinite scrolling
   const [page, setPage] = useState(1);
-  const preventRef = useRef(true); //중복 실행 방지
   const obsRef = useRef(null); //observer Element
   const endRef = useRef(false); //모든 글 로드 확인
 
@@ -28,10 +27,7 @@ const Bookmark = () => {
   const obsHandler = (entries) => {
     const target = entries[0];
 
-    if (!endRef.current && target.isIntersecting && preventRef.current) {
-      //옵저버 중복 실행 방지
-
-      preventRef.current = false; //옵저버 중복 실행 방지
+    if (!endRef.current && target.isIntersecting) {
       setPage((prev) => prev + 1); //페이지 값 증가
     }
   };
@@ -44,7 +40,6 @@ const Bookmark = () => {
     try {
       const { data } = await axios.post("/api/post/bookmark/post", body);
       if (data.success) {
-        preventRef.current = true;
         setBookmarkedPosts((prev) => [...prev, ...data.bookmarkPost]);
 
         if (data.bookmarkPost.length < 9) endRef.current = true;

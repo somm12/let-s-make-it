@@ -9,7 +9,6 @@ import firebase from "../../firebase";
 import style from "./Header.module.scss";
 
 const Heading = () => {
-  let resizeTimer;
   const user = useSelector((state) => state.user);
   const [toggleBtn, setToggleBtn] = useState(true);
   const navigate = useNavigate();

@@ -19,6 +19,7 @@ const MainPage = () => {
 
   useEffect(() => {
     const observer = new IntersectionObserver(obsHandler, { threshold: 0.5 }); // 50% 가 보이면 로드하기.
+    console.log(obsRef.current, "값 출력.");
     if (obsRef.current) observer.observe(obsRef.current);
 
     return () => {
