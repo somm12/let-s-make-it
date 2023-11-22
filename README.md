@@ -63,7 +63,7 @@
   ⁉️ 왜 redux에서 직렬화 타입을 사용하도록 권하는 가? <br> <br>
   ✔️ 직렬화 불가능 타입은 직렬화 및 역직렬화를 거치면 정보가 유실 되는 위험이 있음 <br>
   <br>
-  ✔️ 당 타입은 변하기 쉬운 데이터이고, 데이터를 update해도 참조 값이 바뀌지 않아서 redux에서 값의 변경을 탐지하지 못하고 재렌더링을 안하는 문제가 생길수도 있음. <br>
+  ✔️ 직렬화 불가능 타입은 변하기 쉬운 데이터이고, 데이터를 update해도 참조 값이 바뀌지 않아서 redux에서 값의 변경을 탐지하지 못하고 재렌더링을 안하는 문제가 생길수도 있음. <br>
   <br>
 
 ✅ 위의 문제로, array 자료형을 쓰기로 결정했고, 프론트에서 array를 set으로 변경 후 has메소드로 즐겨찾기에 추가했던 postId인지 확인하는 로직을 구현했습니다.
@@ -82,8 +82,7 @@
     💥 단점<br>
     ✔️ scroll 이벤트는 스크롤이 될 때마다 일어나기 때문에 event handler에 등록된 함수가 단시간에 무수하게 호출,<br>
     <br>
-    ✔️ getBoundingClientReact() 함수는 특정 지점 위치 계산하는데, viewport와 element의 상대적인 위치 정보를 반환하기 때문에 스크롤이 될 때마다 새로 계산하고 reflow 현상 발생. <br>
-        - 근본적인 문제: 특정 요소가 보이는지를 판단하는 코드를 위해 main thread(브라우저 자바스크립트 엔진의 single thread)를 낭비. 성능이 나빠질수 있음.
+    ✔️ getBoundingClientReact() 함수는 특정 지점 위치 계산하는데, viewport와 element의 상대적인 위치 정보를 반환하기 때문에 스크롤이 될 때마다 새로 계산하고 reflow 현상 발생. <br> - 근본적인 문제: 특정 요소가 보이는지를 판단하는 코드를 위해 main thread(브라우저 자바스크립트 엔진의 single thread)를 낭비. 성능이 나빠질수 있음.
     <br>
 
 2️⃣ Intersection Observer API <br><br>
