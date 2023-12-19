@@ -11,7 +11,7 @@ const PostList = ({ postList }) => {
           <Link to={`/post/${post.postNum}`}>
             <div className={style.thumbNail}>
               {post.image && <img src={post.image} />}
-              <h4>{post.title}</h4>
+              <p className={style.postTitle}>{post.title}</p>
             </div>
           </Link>
         </div>

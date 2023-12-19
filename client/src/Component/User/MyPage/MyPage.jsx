@@ -106,7 +106,11 @@ const MyPage = () => {
           </tr>
         </tbody>
       </table>
-      <button disabled={!isChange} onClick={submitProfile}>
+      <button
+        className={style.storeBtn}
+        disabled={!isChange}
+        onClick={submitProfile}
+      >
         저장
       </button>
     </div>

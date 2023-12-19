@@ -4,9 +4,7 @@ import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import firebase from "../../firebase";
-import img1 from "../../img/1.jpg";
-import img2 from "../../img/2.jpg";
-import img3 from "../../img/3.jpg";
+import bgImg from "../../img/bgImg.jpg";
 
 import style from "./Header.module.scss";
 
@@ -18,14 +16,13 @@ const Heading = () => {
     firebase.auth().signOut();
     navigate("/");
   };
-  const images = [img1, img2, img3];
-  const chosenImage = images[Math.floor(Math.random() * images.length)];
-  console.log(chosenImage);
+
   return (
     <div className={style.headerWrapper}>
       <div className={style.headerBgImg}>
-        <img src={chosenImage} alt="" />
+        <img src={bgImg} alt="" />
       </div>
+
       <div className={style.navBarWrapper}>
         <div className={style.logoWrapper}>
           <a className={style.serviceName} href="/">
