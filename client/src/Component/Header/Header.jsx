@@ -4,7 +4,6 @@ import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import firebase from "../../firebase";
-import bgImg from "../../img/bgImg.jpg";
 
 import style from "./Header.module.scss";
 
@@ -18,11 +17,7 @@ const Heading = () => {
   };
 
   return (
-    <div className={style.headerWrapper}>
-      <div className={style.headerBgImg}>
-        <img src={bgImg} alt="" />
-      </div>
-
+    <header className={style.headerWrapper}>
       <div className={style.navBarWrapper}>
         <div className={style.logoWrapper}>
           <a className={style.serviceName} href="/">
@@ -36,40 +31,39 @@ const Heading = () => {
             icon={faBars}
           />
         </div>
-        {toggleBtn && (
-          <nav>
-            <header>
-              <div className={style.userNavbar}>
-                <Link className={style.mainMenu} to="/upload">
-                  Upload
-                </Link>
-                <Link className={style.mainMenu} to="/">
-                  Home
-                </Link>
 
-                {user.accessToken ? (
-                  <>
-                    <Link className={style.userMenu} to="/mypage">
-                      MyPage
-                    </Link>
-                    <Link className={style.userMenu} to="/bookmark">
-                      Bookmark
-                    </Link>
-                    <div className={style.userMenu} onClick={logOut}>
-                      LogOut
-                    </div>
-                  </>
-                ) : (
-                  <Link className={style.userMenu} to="/login">
-                    Login
+        <nav className={toggleBtn ? style.menuActive : style.menuInActive}>
+          <header>
+            <div className={style.userNavbar}>
+              <Link className={style.mainMenu} to="/upload">
+                Upload
+              </Link>
+              <Link className={style.mainMenu} to="/">
+                Home
+              </Link>
+
+              {user.accessToken ? (
+                <>
+                  <Link className={style.userMenu} to="/mypage">
+                    MyPage
                   </Link>
-                )}
-              </div>
-            </header>
-          </nav>
-        )}
+                  <Link className={style.userMenu} to="/bookmark">
+                    Bookmark
+                  </Link>
+                  <div className={style.userMenu} onClick={logOut}>
+                    LogOut
+                  </div>
+                </>
+              ) : (
+                <Link className={style.userMenu} to="/login">
+                  Login
+                </Link>
+              )}
+            </div>
+          </header>
+        </nav>
       </div>
-    </div>
+    </header>
   );
 };
 

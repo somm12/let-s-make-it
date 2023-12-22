@@ -3,7 +3,7 @@ import List from "../Post/PostList/PostList";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
-
+import bgImg from "../../img/bgImg.jpg";
 import style from "./MainPage.module.scss";
 
 const MainPage = () => {
@@ -89,6 +89,9 @@ const MainPage = () => {
   }, [isSortBtnOpen]);
   return (
     <div className={style.mainWrapper}>
+      <div className={style.headerBgImg}>
+        <img src={bgImg} alt="" />
+      </div>
       <div className={style.finderContainer}>
         <input
           value={searchTerm}
