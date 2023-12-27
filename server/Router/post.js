@@ -136,9 +136,11 @@ router.post("/bookmark/post", (req, res) => {
 });
 // 현재 로그인된 유저의 bookmark 배열(postId 담고 있음)을 불러옴.
 router.post("/bookmark/postId", (req, res) => {
+  console.log(req.body, "바디");
   User.findOne({ uid: req.body.uid })
     .exec()
     .then((userInfo) => {
+      console.log(userInfo, "엥에에엥");
       res.status(200).json({ success: true, bookmark: userInfo.bookmark });
     })
     .catch((err) => {

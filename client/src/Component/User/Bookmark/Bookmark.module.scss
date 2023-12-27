@@ -1,7 +1,20 @@
+.bookmarkPost {
+  padding-top: 100px;
+  height: 100%;
+}
 .subtitle {
   margin-left: 30px;
   font-weight: bold;
 }
 .observer {
   height: 30px;
+}
+
+.noBookmarkWord {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90%;
+  font-weight: 700;
+  font-size: 20px;
 }

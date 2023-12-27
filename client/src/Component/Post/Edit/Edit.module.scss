@@ -2,6 +2,7 @@
   width: 100%;
   margin-top: 16px;
   margin-bottom: 16px;
+  padding-top: 100px;
 }
 
 .uploadForm {
@@ -10,7 +11,11 @@
   display: flex;
   flex-direction: column;
   font-weight: bold;
-  #title {
+  label {
+    margin-bottom: 5px;
+  }
+  #title,
+  .title {
     border-radius: 8px;
     margin-bottom: 8px;
     border: 1px solid gray;

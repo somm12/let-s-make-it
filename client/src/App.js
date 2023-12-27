@@ -20,22 +20,24 @@ import axios from "axios";
 const App = () => {
   const dispatch = useDispatch();
 
-  const getUserBookmark = async (uid) => {
-    let body = {
-      uid,
-    };
-    try {
-      const { data } = await axios.post("/api/post/bookmark/postId", body);
+  // const getUserBookmark = async (uid) => {
+  //   let body = {
+  //     uid,
+  //   };
+  //   console.log(uid, "!!!!!!!!!!!!!!");
+  //   try {
+  //     const { data } = await axios.post("/api/post/bookmark/postId", body);
 
-      dispatch(setBookmark({ bookmark: data.bookmark })); // id 형태로 넣어줘야함.
-    } catch (e) {
-      console.log(e);
-    }
-  };
+  //     dispatch(setBookmark({ bookmark: data.bookmark })); // id 형태로 넣어줘야함.
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // };
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged((userInfo) => {
       // 현재 로그인한 유저의 정보.
+
       if (userInfo !== null) {
         let user = {
           displayName: userInfo.multiFactor.user.displayName,
@@ -45,7 +47,7 @@ const App = () => {
         };
 
         dispatch(loginUser(user));
-        getUserBookmark(userInfo.multiFactor.user.uid);
+        // getUserBookmark(userInfo.multiFactor.user.uid);
       } else {
         // 현재 유저 정보가 없다면, 로그인 상태가 아니므로, user store를 비운다.
         dispatch(clearUser());

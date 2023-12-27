@@ -72,7 +72,12 @@ const Upload = () => {
     <div className={style.uploadWrapper}>
       <form className={style.uploadForm}>
         <label htmlFor="label">제목</label>
-        <input id="title" value={title} onChange={onChangeText} />
+        <input
+          className={style.title}
+          id="title"
+          value={title}
+          onChange={onChangeText}
+        />
         <ImageUpload setImage={setImage} />
         {image && <img src={image} alt="" />}
 

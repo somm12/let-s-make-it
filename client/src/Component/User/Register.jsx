@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import firebase from "../../firebase.js";
-
+import { useDispatch } from "react-redux";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+import { loginUser, clearUser } from "../../Reducer/userSlice";
 import style from "./Login/Login.module.scss";
 const Register = () => {
+  const dispatch = useDispatch();
+  const intialPhotoURL =
+    "https://kr.object.ncloudstorage.com/letsmakeit/user/92190016.JPG";
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -14,9 +17,10 @@ const Register = () => {
 
   const [nameCheck, setNameCheck] = useState(false);
   const [nameCheckMsg, setNameCheckMsg] = useState("");
-
+  const [errorMsg, setErrorMsg] = useState("");
   let navigate = useNavigate();
   const signUp = async (e) => {
+    let createdUser;
     setFlag(true);
     e.preventDefault();
     if (!(name && email && password && PWConfirm)) {
@@ -28,29 +32,62 @@ const Register = () => {
     if (!nameCheck) {
       return alert("닉네임 중복검사를 해주세요!");
     }
-    let createdUser = await firebase
-      .auth()
-      .createUserWithEmailAndPassword(email, password);
-    // 기본 프로필 이미지 할당.
-    await createdUser.user.updateProfile({
-      displayName: name,
-      photoURL:
-        "https://kr.object.ncloudstorage.com/letsmakeit/user/92190016.JPG",
-    });
 
+    try {
+      createdUser = await firebase
+        .auth()
+        .createUserWithEmailAndPassword(email, password);
+
+      // 기본 프로필 이미지 할당.
+      await createdUser.user.updateProfile({
+        displayName: name,
+        photoURL: intialPhotoURL,
+      });
+
+      let temp = {
+        displayName: name,
+        uid: createdUser.user.multiFactor.user.uid,
+        accessToken: createdUser.user.multiFactor.user.accessToken,
+        photoURL: intialPhotoURL,
+      };
+
+      dispatch(loginUser(temp));
+    } catch (err) {
+      switch (err.code) {
+        case "auth/user-not-found" || "auth/wrong-password":
+          setErrorMsg("이메일 혹은 비밀번호가 일치하지 않습니다.");
+          break;
+        case "auth/email-already-in-use":
+          setErrorMsg("이미 사용 중인 이메일입니다.");
+          break;
+        case "auth/weak-password":
+          setErrorMsg("비밀번호는 6글자 이상이어야 합니다.");
+          break;
+        case "auth/network-request-failed":
+          setErrorMsg("네트워크 연결에 실패 하였습니다.");
+          break;
+        case "auth/invalid-email":
+          setErrorMsg("잘못된 이메일 형식입니다.");
+          break;
+        case "auth/internal-error":
+          setErrorMsg("잘못된 요청입니다.");
+          break;
+        default:
+          setErrorMsg("로그인에 실패 하였습니다.");
+      }
+    }
     let body = {
       email: createdUser.user.multiFactor.user.email,
       displayName: createdUser.user.multiFactor.user.displayName,
       uid: createdUser.user.multiFactor.user.uid,
-      photoURL:
-        "https://kr.object.ncloudstorage.com/letsmakeit/user/92190016.JPG",
+      photoURL: intialPhotoURL,
       returnSecureToken: true,
     };
 
     try {
       await axios.post("/api/user/signUp", body);
       setFlag(false);
-      navigate("/login");
+      navigate("/");
     } catch (e) {
       console.log(e);
       return alert("회원가입이 실패했습니다");
@@ -112,9 +149,8 @@ const Register = () => {
           value={PWConfirm}
           onChange={(e) => setPWConfirm(e.currentTarget.value)}
         />
-        <button disabled={flag} onClick={signUp}>
-          회원가입
-        </button>
+        <button onClick={signUp}>회원가입</button>
+        {errorMsg !== "" && <p>{errorMsg}</p>}
       </form>
     </div>
   );
