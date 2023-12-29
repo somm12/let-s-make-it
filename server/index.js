@@ -1,7 +1,7 @@
 import express from "express";
 import path from "path";
 import mongoose from "mongoose";
-import KEY from "./db-key.js";
+import config from "./config/key.js";
 import post from "./Router/post.js";
 import user from "./Router/user.js";
 import comment from "./Router/comment.js";
@@ -20,7 +20,7 @@ app.use("/api/comment", comment);
 
 app.listen(port, () => {
   mongoose
-    .connect(KEY)
+    .connect(config.mongoURI)
     .then(() => {
       console.log(`Example app listening on port ${port}`);
       console.log("connecting mongodb..");
