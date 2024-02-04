@@ -96,73 +96,55 @@
 ## 7 UI
 
 <details>
-<summary> 1. 메인화면</summary>
+<summary> 메인화면</summary>
   <br/>
 <div markdown="1">
 
-<img width="800" alt="image" src="https://github.com/somm12/lets-make-it/assets/63543733/8c21a834-caa0-4dde-9624-58a9d5d28053">
-</div>
-</details>
-
-<details>
-<summary> 2. 글쓰기</summary>
-  <br/>
-<div markdown="1">
-
-<img width="800" alt="스크린샷 2023-07-25 오후 8 34 55" src="https://github.com/somm12/lets-make-it/assets/63543733/9d754d08-9e1d-493c-8913-b0457885a156">
+![메인화면](https://github.com/somm12/lets-make-it/assets/63543733/7956423a-54b2-4714-8458-94da2cb8d5a9)
 
 </div>
 </details>
 
 <details>
-<summary> 3. 글수정</summary>
+<summary> 글 조회 및 댓글 </summary>
   <br/>
 <div markdown="1">
 
-<img width="800" alt="image" src="https://github.com/somm12/lets-make-it/assets/63543733/ab69233d-f345-4907-a64c-7402c897daa7">
+![디테일2](https://github.com/somm12/lets-make-it/assets/63543733/a44d1b8c-fe35-40c6-bc86-67c6d5f4ef12)
+![디테일페이지](https://github.com/somm12/lets-make-it/assets/63543733/724d72e3-c29b-484f-9972-67be138636dc)
 
 </div>
 </details>
 
 <details>
-<summary> 4. 글조회 및 댓글 </summary>
+<summary> 글쓰기 </summary>
   <br/>
 <div markdown="1">
 
-<img width="800" alt="image" src="https://github.com/somm12/lets-make-it/assets/63543733/e49f5f6e-fbc3-48f4-9a14-8a6f4e158b81">
-<img width="800" alt="image" src="https://github.com/somm12/lets-make-it/assets/63543733/f88c140a-c008-43a3-aa91-f597441bfbdf">
-
-</div>
-</details>
-<details>
-<summary> 5. 댓글 수정 및 삭제</summary>
-  <br/>
-<div markdown="1">
-
-<img width="800" alt="image" src="https://github.com/somm12/lets-make-it/assets/63543733/b67484fe-550a-4a83-adee-270f01aaee7c">
-
+<img width="800" alt="image" src="https://github.com/somm12/lets-make-it/assets/63543733/ba4c7893-08a9-4865-baa8-54d64ca24bf2">
 </div>
 </details>
 
 <details>
-<summary> 6. 북마크</summary>
+<summary> 마이페이지 </summary>
   <br/>
 <div markdown="1">
 
-<img width="800" alt="image" src="https://github.com/somm12/lets-make-it/assets/63543733/47a4771f-8e8a-4def-9dfc-196122c94552">
+![스크린샷 2024-02-04 오후 7 43 52](https://github.com/somm12/lets-make-it/assets/63543733/d6ccf532-d319-4b5c-9290-601ceff37da5)
 
 </div>
 </details>
 
 <details>
-<summary> 7. 마이페이지</summary>
+<summary> 즐겨찾기 페이지 </summary>
   <br/>
 <div markdown="1">
 
-<img width="800" alt="image" src="https://github.com/somm12/lets-make-it/assets/63543733/20ed810a-7857-4ea2-b9f0-c05cd6767dbf">
+![스크린샷 2024-02-04 오후 7 44 09](https://github.com/somm12/lets-make-it/assets/63543733/a73c8c7f-0fc7-496f-96fd-567b683cbdc2)
 
 </div>
 </details>
+
 <br/>
 
 ## 8 react query
