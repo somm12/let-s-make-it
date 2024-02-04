@@ -5,20 +5,27 @@
   position: fixed;
   top: 0;
   width: 100%;
+  padding: 20px;
+  background-color: white;
+  font-family: "Nunito", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 1000;
+  font-style: normal;
   .logoWrapper {
     display: flex;
     width: 100%;
     justify-content: space-between;
-    color: white;
     padding: 10px;
     align-items: center;
+    a {
+      color: black;
+    }
   }
   .navBarWrapper {
     display: flex;
     justify-content: space-between;
     width: 100%;
     padding: 5px;
-    background-color: #607d8b;
   }
 
   header {
@@ -26,23 +33,25 @@
     font-weight: 600;
   }
   .serviceName {
-    color: white;
     text-decoration: none;
-    font-weight: bold;
+
+    font-size: 20px;
+    font-weight: 900;
   }
   .userNavbar {
     display: flex;
+    a {
+      color: black;
+    }
   }
 
   .mainMenu {
     padding: 10px;
     text-decoration: none;
-    color: white;
   }
   .userMenu {
     padding: 10px;
     text-decoration: none;
-    color: white;
   }
 }
 

@@ -7,7 +7,7 @@ import user from "./Router/user.js";
 import comment from "./Router/comment.js";
 const __dirname = path.resolve();
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 2000;
 // build 내의 js,css, component들을 static으로 정해줌.
 app.use(express.static(path.join(__dirname, "../client/build")));
 // body-parser (client에서 보내는 body data를 받기 위해서 파싱하는 과정)

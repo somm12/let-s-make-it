@@ -40,6 +40,7 @@ router.post("/submit", (req, res) => {
 
 router.post("/list", (req, res) => {
   let sort = {};
+  console.log(req.body, "요청 본!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
   if (req.body.sort === "최신순") {
     sort.createdAt = -1;
   } else {
@@ -59,6 +60,7 @@ router.post("/list", (req, res) => {
     .limit(8) // 그 중 5개만.
     .exec()
     .then((doc) => {
+      console.log(doc, "보낼 데이터");
       res.status(200).json({ success: true, postList: doc });
     })
     .catch((err) => {

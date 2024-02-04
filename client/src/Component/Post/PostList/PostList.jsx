@@ -10,8 +10,10 @@ const PostList = ({ postList }) => {
         <div className={style.eachPost} key={post._id}>
           <Link to={`/post/${post.postNum}`}>
             <div className={style.thumbNail}>
-              {post.image && <img src={post.image} />}
-              <p className={style.postTitle}>{post.title}</p>
+              <div className={style.postWrapper}>
+                {post.image && <img src={post.image} />}
+                <p className={style.postTitle}>{post.title}</p>
+              </div>
             </div>
           </Link>
         </div>

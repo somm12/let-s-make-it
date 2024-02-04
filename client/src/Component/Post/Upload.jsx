@@ -23,7 +23,7 @@ const Upload = () => {
     const {
       target: { value },
     } = e;
-    value = value.replaceAll("<br>", "\n");
+
     setContent(value);
   };
   const onChangeText = (e) => {

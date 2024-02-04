@@ -23,8 +23,9 @@
   padding: 20px;
 
   img {
-    width: 100%;
+    width: 60%;
     height: 100%;
+    border-radius: 15px;
   }
   .titleHeadline {
     display: flex;
@@ -58,6 +59,7 @@
   }
   .thumbNailImgWrapper {
     display: flex;
+    justify-content: center;
   }
   .content {
     width: 100%;
