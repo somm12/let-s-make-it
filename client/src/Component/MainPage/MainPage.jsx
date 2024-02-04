@@ -14,32 +14,36 @@ const MainPage = () => {
   const [page, setPage] = useState(1);
   const [isSortBtnOpen, setIsSortBtnOpen] = useState(false);
 
+  const [isLoading, setIsLoading] = useState(true);
+
   const obsRef = useRef(null); //observer Element
   const endRef = useRef(false); //모든 글 로드 확인
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(obsHandler, { threshold: 0.5 }); // 50% 가 보이면 로드하기.
-    console.log(obsRef.current, "값 출력.");
-    if (obsRef.current) observer.observe(obsRef.current);
-
-    return () => {
-      observer.disconnect();
-    };
-  }, []);
+  const preventRef = useRef(true); //옵저버 중복 실행 방지
 
   useEffect(() => {
     getPostLoadMore();
   }, [page, sort]);
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(obsHandler, { threshold: 1 }); // 50% 가 보이면 로드하기.
+
+    if (obsRef.current) observer.observe(obsRef.current);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [isLoading]);
+
   const obsHandler = (entries) => {
     const target = entries[0];
 
-    if (!endRef.current && target.isIntersecting) {
+    if (!endRef.current && target.isIntersecting && !isLoading) {
       setPage((prev) => prev + 1); //페이지 값 증가
     }
   };
 
   const getPostLoadMore = useCallback(async () => {
+    setIsLoading(true);
     let body = {
       sort,
       searchTerm,
@@ -48,16 +52,15 @@ const MainPage = () => {
 
     try {
       const { data } = await axios.post("/api/post/list", body);
+
       if (data.success) {
-        // setSkip(skip + data.postList.length);
-
         if (page === 1) {
-          // 검색을 한 경우, 다시 검색 결과 페이지의 첫페이지를 보여야하므로, 초기화.
           setPostList([...data.postList]);
-          // endRef.current = false; // 검색 결과가 페이지 개수가 1개 밖에 없다면, endRef가 true가 되고, 그 이후 검색에서도 페이지가 여러 개여도 true가 되어서 (로딩이 안되어) false를 할당.
         } else setPostList((prev) => [...prev, ...data.postList]);
-
-        if (data.postList.length < 8) endRef.current = true;
+        setIsLoading(false);
+        if (data.postList.length < 8) {
+          endRef.current = true;
+        }
       }
     } catch (e) {
       console.log(e);
@@ -70,7 +73,10 @@ const MainPage = () => {
       if (page === 1) {
         getPostLoadMore();
       } // 검색을 했지만, 이미 현재 페이지가 첫페이지라면, 호출
-      else setPage(1); // 첫 페이지로 상태변경을 함으로써, getPostLoadMore함수가 자동으로 페이지를 불러온다.
+      else {
+        setPage(1); // 첫 페이지로 상태변경을 함으로써, getPostLoadMore함수가 자동으로 페이지를 불러온다.
+      }
+      endRef.current = false;
     }
   };
 
@@ -89,15 +95,12 @@ const MainPage = () => {
   }, [isSortBtnOpen]);
   return (
     <div className={style.mainWrapper}>
-      <div className={style.headerBgImg}>
-        <img src={bgImg} alt="" />
-      </div>
       <div className={style.finderContainer}>
         <input
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           onKeyDown={searchHandler}
-          placeholder="검색어를 입력하세요"
+          placeholder="레시피 검색하기"
           type="text"
         />
       </div>
@@ -118,6 +121,7 @@ const MainPage = () => {
               setSort("최신순");
               setPage(1);
               setIsSortBtnOpen(!isSortBtnOpen);
+              endRef.current = false;
             }}
           >
             최신순
@@ -127,6 +131,7 @@ const MainPage = () => {
               setSort("인기순");
               setPage(1);
               setIsSortBtnOpen(!isSortBtnOpen);
+              endRef.current = false;
             }}
           >
             인기순
