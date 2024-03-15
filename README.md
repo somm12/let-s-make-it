@@ -7,8 +7,19 @@
 ## 2. 프로젝트 계획 이유
 
 기초 CRUD 기능이 있는 프로젝트를 개발하고 이를 통해 redux, react-query를 공부하려고 합니다.
+<br>
 
-## 3. TECH STACK
+## 3. 실행 방법
+
+### VS Code IDE 기준
+
+1.  git clone
+2.  vs code 실행 후, 프로젝트 열기
+3.  server 폴더에서 npm start 명령어 입력 후 서버 실행
+4.  client 폴더에서 npm start 명령어 입력 후 프론트 실행
+5.  localhost 3000번 포트 접속.
+
+## 4. TECH STACK
 
 <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=ffffff"/> <img src="https://img.shields.io/badge/REACT-000000?style=for-the-badge&logo=React&logoColor=61DAFB"/>
 <img src="https://img.shields.io/badge/REACT QUERY-FF4154?style=for-the-badge&logo=React Query&logoColor=white">
@@ -20,15 +31,15 @@
 
 <br>
 
-## 4. 목차
+## 5. 목차
 
-1. [주요기능](#5-주요기능)
-2. [마주친 문제와 해결과정](#6-마주친-문제와-해결과정)
-3. [UI](#7-ui)
-4. [react query](#8-react-query)
-5. [redux](#9-redux)
+1. [주요기능](#6-주요기능)
+2. [마주친 문제와 해결과정](#7-마주친-문제와-해결과정)
+3. [UI](#8-ui)
+4. [react query](#9-react-query)
+5. [redux](#10-redux)
 
-## 5 주요기능
+## 6 주요기능
 
 1. 게시판
    - 글쓰기 및 파일 업로드 (Naver Cloud Storage)
@@ -54,7 +65,7 @@
 
 <br>
 
-## 6 마주친 문제와 해결과정
+## 7 마주친 문제와 해결과정
 
 1. 북마크 기능 – non serializable error
 
@@ -93,7 +104,7 @@
 
 ✅ 스크롤이 발생할 때마다 addEventListener 콜백함수 호출 및 element 위치 계산으로 인한 성능문제가 없는 방향으로 Intersection Observer API 를 선택했습니다<br>
 
-## 7 UI
+## 8 UI
 
 <details>
 <summary> 메인화면</summary>
@@ -145,9 +156,23 @@
 </div>
 </details>
 
+<details>
+<summary> 반응형 모바일 웹 </summary>
+  <br/>
+<div markdown="1">
+
+![스크린샷 2024-03-15 오후 4 17 34](https://github.com/somm12/lets-make-it/assets/63543733/32f61e08-e60d-4c92-8f60-d1d50dd0064e)
+
+![스크린샷 2024-03-15 오후 4 19 01](https://github.com/somm12/lets-make-it/assets/63543733/a1c8cbf9-bf9d-4146-a39b-d078978c04e0)
+
+![스크린샷 2024-03-15 오후 4 18 46](https://github.com/somm12/lets-make-it/assets/63543733/5b6a4e9c-fd4c-4cee-8cf6-540884ab83b4)
+
+</div>
+</details>
+
 <br/>
 
-## 8 react query
+## 9 react query
 
 - react-query란?
   - React Application에서 서버의 상태를 불러오고, 캐싱하며 **지속적으로 동기화**하고 업데이트 하는 작업을 도와주는 라이브러리
@@ -169,7 +194,7 @@
   - 캐싱을 효율적으로 관리
   - 여러번 같은 데이터 요청시, 한번만 처리
 
-## 9 redux
+## 10 redux
 
 - redux란
   - 자바스크립트 애플리케이션에서 상태를 효율적으로 관리할 수 있게 도와주는 도구
