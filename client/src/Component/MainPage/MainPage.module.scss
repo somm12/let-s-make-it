@@ -28,7 +28,6 @@
   margin-bottom: 20px;
 
   input {
-    width: 35%;
     padding: 10px;
     border-radius: 30px;
     border: 1.5px solid gray;
@@ -76,4 +75,14 @@
 
 .dropdownFalse {
   display: none;
+}
+@media screen and (max-width: 1080px) {
+  input {
+    width: 50%;
+  }
+}
+@media screen and (max-width: 540px) {
+  input {
+    width: 100%;
+  }
 }
