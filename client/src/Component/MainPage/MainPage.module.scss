@@ -1,5 +1,7 @@
 .mainWrapper {
   margin-top: 200px;
+  display: flex;
+  justify-content: center;
   .headerBgImg {
     width: 100%;
     position: absolute;
@@ -14,6 +16,9 @@
 
       object-fit: cover;
     }
+  }
+  .mainBox {
+    max-width: 960px;
   }
 }
 .finderContainer {

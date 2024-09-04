@@ -95,52 +95,54 @@ const MainPage = () => {
   }, [isSortBtnOpen]);
   return (
     <div className={style.mainWrapper}>
-      <div className={style.finderContainer}>
-        <input
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          onKeyDown={searchHandler}
-          placeholder="레시피 검색하기"
-          type="text"
-        />
-      </div>
-
-      <div className={style.dropdownButton} ref={sortBtnRef}>
-        <button
-          className={style.textButton}
-          onClick={() => setIsSortBtnOpen(!isSortBtnOpen)}
-        >
-          {sort}
-          <FontAwesomeIcon icon={faCaretDown} />
-        </button>
-        <div
-          className={isSortBtnOpen ? style.dropdownTrue : style.dropdownFalse}
-        >
-          <button
-            onClick={() => {
-              setSort("최신순");
-              setPage(1);
-              setIsSortBtnOpen(!isSortBtnOpen);
-              endRef.current = false;
-            }}
-          >
-            최신순
-          </button>
-          <button
-            onClick={() => {
-              setSort("인기순");
-              setPage(1);
-              setIsSortBtnOpen(!isSortBtnOpen);
-              endRef.current = false;
-            }}
-          >
-            인기순
-          </button>
+      <div className={style.mainBox}>
+        <div className={style.finderContainer}>
+          <input
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            onKeyDown={searchHandler}
+            placeholder="레시피 검색하기"
+            type="text"
+          />
         </div>
-      </div>
-      <List postList={postList} />
 
-      <div className={style.observer} ref={obsRef}></div>
+        <div className={style.dropdownButton} ref={sortBtnRef}>
+          <button
+            className={style.textButton}
+            onClick={() => setIsSortBtnOpen(!isSortBtnOpen)}
+          >
+            {sort}
+            <FontAwesomeIcon icon={faCaretDown} />
+          </button>
+          <div
+            className={isSortBtnOpen ? style.dropdownTrue : style.dropdownFalse}
+          >
+            <button
+              onClick={() => {
+                setSort("최신순");
+                setPage(1);
+                setIsSortBtnOpen(!isSortBtnOpen);
+                endRef.current = false;
+              }}
+            >
+              최신순
+            </button>
+            <button
+              onClick={() => {
+                setSort("인기순");
+                setPage(1);
+                setIsSortBtnOpen(!isSortBtnOpen);
+                endRef.current = false;
+              }}
+            >
+              인기순
+            </button>
+          </div>
+        </div>
+        <List postList={postList} />
+
+        <div className={style.observer} ref={obsRef}></div>
+      </div>
     </div>
   );
 };

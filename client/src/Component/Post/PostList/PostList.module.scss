@@ -1,19 +1,19 @@
 .postListWrapper {
   display: grid;
-  grid-template-columns: repeat(4, minmax(300px, auto));
+  grid-template-columns: repeat(4, minmax(200px, auto));
   @media (max-width: 900px) {
     & {
-      grid-template-columns: repeat(3, minmax(300px, auto));
+      grid-template-columns: repeat(3, minmax(200px, auto));
     }
   }
   @media (max-width: 768px) {
     & {
-      grid-template-columns: repeat(2, minmax(300px, auto));
+      grid-template-columns: repeat(2, minmax(200px, auto));
     }
   }
   @media (max-width: 550px) {
     & {
-      grid-template-columns: repeat(1, minmax(300px, auto));
+      grid-template-columns: repeat(1, minmax(200px, auto));
     }
   }
   .postWrapper {
@@ -24,6 +24,7 @@
   }
   img {
     object-fit: cover;
+    width: 214px;
   }
 }
 
@@ -31,9 +32,8 @@
   justify-content: space-between;
   align-items: center;
   color: grey;
-  margin: 30px;
+  margin: 10px;
 
-  padding: 10px;
   background-color: #f7f7f7;
   border-radius: 10px;
 

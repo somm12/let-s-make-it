@@ -114,17 +114,17 @@ const Detail = ({ post }) => {
             <div>{post.content}</div>
           </div>
         </div>
+        {post.author.uid === user.uid && (
+          <div className={style.buttonBox}>
+            <Link to={`/edit/${post.postNum}`}>
+              <button className={style.editBtn}>수정</button>
+            </Link>
+            <button className={style.deleteBtn} onClick={deleteHandler}>
+              삭제
+            </button>
+          </div>
+        )}
       </div>
-      {post.author.uid === user.uid && (
-        <div className={style.buttonBox}>
-          <Link to={`/edit/${post.postNum}`}>
-            <button className={style.editBtn}>수정</button>
-          </Link>
-          <button className={style.deleteBtn} onClick={deleteHandler}>
-            삭제
-          </button>
-        </div>
-      )}
     </div>
   );
 };
