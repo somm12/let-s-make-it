@@ -51,15 +51,17 @@ const Bookmark = () => {
 
   return (
     <div className={style.bookmarkPost}>
-      <h4 className={style.subtitle}>즐겨찾기한 레시피👩‍🍳</h4>
-      {bookmarkedPosts.length > 0 ? (
-        <PostList postList={bookmarkedPosts} />
-      ) : (
-        <div className={style.noBookmarkWord}>
-          즐겨찾기한 레시피가 없습니다🧐
-        </div>
-      )}
-      <div className={style.observer} ref={obsRef}></div>
+      <div className={style.bookmarkPostWrapper}>
+        <h4 className={style.subtitle}>즐겨찾기한 레시피👩‍🍳</h4>
+        {bookmarkedPosts.length > 0 ? (
+          <PostList postList={bookmarkedPosts} />
+        ) : (
+          <div className={style.noBookmarkWord}>
+            즐겨찾기한 레시피가 없습니다🧐
+          </div>
+        )}
+        <div className={style.observer} ref={obsRef}></div>
+      </div>
     </div>
   );
 };
