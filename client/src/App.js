@@ -20,20 +20,6 @@ import axios from "axios";
 const App = () => {
   const dispatch = useDispatch();
 
-  // const getUserBookmark = async (uid) => {
-  //   let body = {
-  //     uid,
-  //   };
-  //   console.log(uid, "!!!!!!!!!!!!!!");
-  //   try {
-  //     const { data } = await axios.post("/api/post/bookmark/postId", body);
-
-  //     dispatch(setBookmark({ bookmark: data.bookmark })); // id 형태로 넣어줘야함.
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // };
-
   useEffect(() => {
     firebase.auth().onAuthStateChanged((userInfo) => {
       // 현재 로그인한 유저의 정보.
