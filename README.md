@@ -111,7 +111,7 @@
   <br/>
 <div markdown="1">
 
-![메인화면](https://github.com/somm12/lets-make-it/assets/63543733/7956423a-54b2-4714-8458-94da2cb8d5a9)
+<img src="https://github.com/user-attachments/assets/2034dbb7-f455-4b2d-9f0b-97f8fcb2645c" width="900px"/>
 
 </div>
 </details>
@@ -121,8 +121,8 @@
   <br/>
 <div markdown="1">
 
-![디테일2](https://github.com/somm12/lets-make-it/assets/63543733/a44d1b8c-fe35-40c6-bc86-67c6d5f4ef12)
-![디테일페이지](https://github.com/somm12/lets-make-it/assets/63543733/724d72e3-c29b-484f-9972-67be138636dc)
+<img src="https://github.com/user-attachments/assets/fe88e939-ef1e-433a-9a00-98c7f2eb7709" width="900px"/>
+<img src="https://github.com/user-attachments/assets/8a707020-183c-4b85-8be6-501d275ab1db" width="900px"/>
 
 </div>
 </details>
@@ -132,7 +132,8 @@
   <br/>
 <div markdown="1">
 
-<img width="800" alt="image" src="https://github.com/somm12/lets-make-it/assets/63543733/ba4c7893-08a9-4865-baa8-54d64ca24bf2">
+<img src="https://github.com/user-attachments/assets/aef300d8-be3e-41f0-9502-ad244f2ced00" width="600px"/>
+
 </div>
 </details>
 
@@ -141,7 +142,7 @@
   <br/>
 <div markdown="1">
 
-![스크린샷 2024-02-04 오후 7 43 52](https://github.com/somm12/lets-make-it/assets/63543733/d6ccf532-d319-4b5c-9290-601ceff37da5)
+<img src="https://github.com/somm12/lets-make-it/assets/63543733/d6ccf532-d319-4b5c-9290-601ceff37da5"/>
 
 </div>
 </details>
@@ -151,7 +152,7 @@
   <br/>
 <div markdown="1">
 
-![스크린샷 2024-02-04 오후 7 44 09](https://github.com/somm12/lets-make-it/assets/63543733/a73c8c7f-0fc7-496f-96fd-567b683cbdc2)
+<img src="https://github.com/user-attachments/assets/04194b3d-b698-4dbe-a0db-1877d706d789"/>
 
 </div>
 </details>
@@ -161,11 +162,8 @@
   <br/>
 <div markdown="1">
 
-![스크린샷 2024-03-15 오후 4 17 34](https://github.com/somm12/lets-make-it/assets/63543733/32f61e08-e60d-4c92-8f60-d1d50dd0064e)
-
-![스크린샷 2024-03-15 오후 4 19 01](https://github.com/somm12/lets-make-it/assets/63543733/a1c8cbf9-bf9d-4146-a39b-d078978c04e0)
-
-![스크린샷 2024-03-15 오후 4 18 46](https://github.com/somm12/lets-make-it/assets/63543733/5b6a4e9c-fd4c-4cee-8cf6-540884ab83b4)
+<img src="https://github.com/user-attachments/assets/5c2ed5c8-421f-4291-8be3-d9776b14f2c0"/>
+<img src="https://github.com/user-attachments/assets/02886dbf-16b3-40f9-8fc6-a96f8560bf3d"/>
 
 </div>
 </details>
